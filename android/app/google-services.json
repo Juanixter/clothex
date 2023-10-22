@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "852678664455",
+    "project_id": "clothex-app",
+    "storage_bucket": "clothex-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852678664455:android:049862a74afee91be3a5a2",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh3eqIIG7kGdtsnF7jjO6fLPlK0M_IvKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852678664455:android:79d2b6a20dbb6f78e3a5a2",
+        "android_client_info": {
+          "package_name": "com.example.clothex_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh3eqIIG7kGdtsnF7jjO6fLPlK0M_IvKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
