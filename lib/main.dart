@@ -6,7 +6,7 @@ void main() {
     const MaterialApp(
       title: 'Clothex App',
       themeMode: ThemeMode.system,
-      initialRoute: '/home_screen',
+      initialRoute: '/select_color',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );
