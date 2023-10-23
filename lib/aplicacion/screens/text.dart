@@ -23,21 +23,21 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 98, 54, 244)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const TextPage(title: 'Text Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class TextPage extends StatefulWidget {
+  const TextPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TextPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<TextPage> {
   final List<bool> _selectedPartes = <bool>[true, false, false];
   String seleccion = "test";
   String textito = "";

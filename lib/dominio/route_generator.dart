@@ -14,6 +14,9 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => const ClotheTypeScreen());
 
+      case '/text_page':
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
+
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
     }
