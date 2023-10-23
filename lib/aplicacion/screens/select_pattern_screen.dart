@@ -56,13 +56,13 @@ class _PatternScreenState extends State<PatternScreen> {
                       ),
                       TextButton(
                         onPressed: () {},
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                        ),
                         child: const Text("Patrón 3/4",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                        ),
                       ),
                       ElevatedButton.icon(
                         onPressed: () {},
@@ -80,6 +80,11 @@ class _PatternScreenState extends State<PatternScreen> {
                           children: [
                         ElevatedButton(
                           onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              )),
                           child: const Text(
                             'Polka Dots',
                             style: TextStyle(
@@ -87,14 +92,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Rayas Horizontales',
                             style: TextStyle(
@@ -102,14 +107,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Rayas Verticales',
                             style: TextStyle(
@@ -117,14 +122,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Objetos',
                             style: TextStyle(
@@ -132,11 +137,6 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              )),
                         ),
                       ])),
                   Flexible(
@@ -154,6 +154,11 @@ class _PatternScreenState extends State<PatternScreen> {
                           children: [
                         ElevatedButton(
                           onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              )),
                           child: const Text(
                             'Torso',
                             style: TextStyle(
@@ -161,14 +166,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Manga Derecha',
                             style: TextStyle(
@@ -176,14 +181,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Manga Izquierda',
                             style: TextStyle(
@@ -191,14 +196,14 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
                           child: const Text(
                             'Espalda',
                             style: TextStyle(
@@ -206,11 +211,6 @@ class _PatternScreenState extends State<PatternScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              )),
                         ),
                       ]))
                 ]))));

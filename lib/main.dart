@@ -14,7 +14,7 @@ void main() async {
     const MaterialApp(
       title: 'Clothex App',
       themeMode: ThemeMode.system,
-      initialRoute: '/home_screen',
+      initialRoute: '/pattern_screen',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );

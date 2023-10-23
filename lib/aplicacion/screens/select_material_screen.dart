@@ -1,4 +1,5 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
+import 'package:clothex_app/aplicacion/screens/pattern_screen.dart';
 import 'package:clothex_app/aplicacion/screens/select_pattern_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -56,9 +57,10 @@ class _MaterialScreenState extends State<MaterialScreen> {
               children: [
                 Flexible(
                   flex: 5,
-                  child: const Image(
-                      image: NetworkImage(
-                          'https://as1.ftcdn.net/v2/jpg/05/76/36/90/1000_F_576369054_WOwqFMsGcf58Ti0yN5700bBSz0w2w4is.jpg')),
+                  child: Image.asset(
+                    "assets/Images/product6.png",
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 Flexible(
                     child: ButtonBar(
@@ -83,20 +85,20 @@ class _MaterialScreenState extends State<MaterialScreen> {
                     ),
                     TextButton(
                       onPressed: () {},
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                      ),
                       child: const Text("Material 1/4",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold)),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                      ),
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const PatternScreen()));
+                                builder: (context) => SelectPatternScreen()));
                       },
                       icon:
                           const Icon(Icons.arrow_forward, color: Colors.black),
