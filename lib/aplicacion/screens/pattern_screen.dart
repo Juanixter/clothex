@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
 
@@ -6,8 +8,8 @@ class SelectPatternScreen extends StatefulWidget {
   _MyPageState createState() => _MyPageState();
 }
 
-List mycolors = <Color>[
-  Colors.red.shade900,
+List<Color> myColors = <Color>[
+  Colors.red,
   Colors.blue,
   Colors.green,
   Colors.purple,
@@ -15,7 +17,7 @@ List mycolors = <Color>[
   Colors.yellow,
 ];
 
-Color primaryColor = mycolors[0];
+Color primaryColor = myColors[0];
 
 class _MyPageState extends State<SelectPatternScreen> {
   Pattern pattern = Dots(bgColor: Colors.white, fgColor: primaryColor);
@@ -37,7 +39,9 @@ class _MyPageState extends State<SelectPatternScreen> {
         child: Stack(
           children: [
             buildImage(),
+            buildArrows(),
             buildColorIcons(),
+            buildConfirm(),
           ],
         ),
       ),
@@ -49,26 +53,25 @@ class _MyPageState extends State<SelectPatternScreen> {
         height: MediaQuery.of(context).size.height,
         child: CustomPaint(
           painter: MyPainter(pattern),
-          child: Container(
-            color: Colors.white,
-            child: Image.asset(
-              "assets/Images/product6.png",
-              fit: BoxFit.contain,
-            ),
+          child: Image.asset(
+            "assets/Images/product6.png",
+            fit: BoxFit.contain,
           ),
         ),
       );
 
   Widget buildColorIcons() => Positioned(
-      bottom: 35,
-      right: 10,
-      child: Row(
-        children: [
-          for (var i = 0; i < 6; i++) buildIconBtn(mycolors[i]),
-        ],
-      ));
+        bottom: 35,
+        right: 10,
+        child: Row(
+          children: [
+            for (var i = 0; i < myColors.length; i++) buildIconBtn(myColors[i]),
+          ],
+        ),
+      );
 
   Widget buildIconBtn(Color myColor) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 5),
         child: Stack(
           children: [
             Positioned(
@@ -89,7 +92,8 @@ class _MyPageState extends State<SelectPatternScreen> {
               onPressed: () {
                 setState(() {
                   primaryColor = myColor;
-                  if (primaryColor == Colors.red.shade900) {
+
+                  if (primaryColor == Colors.red) {
                     pattern =
                         Dots(bgColor: Colors.white, fgColor: primaryColor);
                   } else if (primaryColor == Colors.blue) {
@@ -98,11 +102,85 @@ class _MyPageState extends State<SelectPatternScreen> {
                   } else if (primaryColor == Colors.green) {
                     pattern = HorizontalStripesLight(
                         bgColor: Colors.white, fgColor: primaryColor);
+                  } else if (primaryColor == Colors.purple) {
+                    pattern = HorizontalStripesLight(
+                        bgColor: Colors.white, fgColor: primaryColor);
+                  } else if (primaryColor == Colors.orange) {
+                    pattern = VerticalStripesLight(
+                        bgColor: Colors.white, fgColor: primaryColor);
+                  } else if (primaryColor == Colors.yellow) {
+                    pattern =
+                        Dots(bgColor: Colors.white, fgColor: primaryColor);
                   }
                 });
               },
             ),
           ],
+        ),
+      );
+
+  Widget buildArrows() => Positioned(
+        bottom: 74,
+        right: 305,
+        left: 305,
+        child: ButtonBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          buttonMinWidth: 80.0,
+          buttonHeight: 40.0,
+          children: [
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pop(context); // Use Navigator.pop to go back
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              label: Text(""),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+            ),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.transparent,
+              ),
+              child: Text("Patrón 3/4",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                // Navigate to the next screen or perform the next action
+              },
+              icon: Icon(Icons.arrow_forward, color: Colors.black),
+              label: Text(""),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+            ),
+          ],
+        ),
+      );
+
+  Widget buildConfirm() => Positioned(
+        bottom: 8,
+        right: 16,
+        left: 16,
+        child: ElevatedButton(
+          onPressed: () {
+            // Handle the confirmation action
+          },
+          child: Text(
+            'Confirm',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
         ),
       );
 }
@@ -115,6 +193,11 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
+
+    // Set the blend mode for the Paint object
+    Paint paint = Paint()..blendMode = BlendMode.modulate;
+
+    // Paint the pattern on the canvas
     pattern.paintOnRect(canvas, size, rect);
   }
 

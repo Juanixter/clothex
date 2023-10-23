@@ -1,6 +1,5 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/pattern_screen.dart';
-import 'package:clothex_app/aplicacion/screens/select_pattern_screen.dart';
 import 'package:flutter/material.dart';
 
 class MaterialScreen extends StatefulWidget {
@@ -41,14 +40,22 @@ class _MaterialScreenState extends State<MaterialScreen> {
     false,
     false
   ];
+
+  void _saveToggleButtonsValues() {
+    // Save the values of the toggle buttons here
+    // You can access the selected values using _selectedMaterials and _toggleButtonsSelection lists
+    // Perform any necessary operations with the selected values
+    // For example, you can print them to the console
+    print('Selected materials: $_selectedMaterials');
+    print('Selected shirt sizes: $_toggleButtonsSelection');
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.green,
-            title: const Text('Clothex',
-                style: TextStyle(
-                  color: Colors.black,
-                ))),
+            backgroundColor: Colors.white,
+            title: const Text('Clothex App',
+                style: TextStyle(color: Colors.black, fontSize: 30))),
         body: Container(
           color: Colors.white,
           child: Center(
@@ -160,7 +167,9 @@ class _MaterialScreenState extends State<MaterialScreen> {
                     child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _saveToggleButtonsValues();
+                    },
                     child: const Text(
                       'Confirm',
                       style: TextStyle(
