@@ -44,7 +44,7 @@ class _MyHomePageState extends State<TextPage> {
   String seleccion = "test";
   String textito = "";
   TextEditingController myController = TextEditingController();
-  double _currentSliderValue = 20;
+  double _currentSliderValue = 12;
 
   void textinho(String s) {
     setState(() {
@@ -101,8 +101,8 @@ class _MyHomePageState extends State<TextPage> {
                 width: 87,
                 color: Colors.red,
                 child: DefaultTextStyle.merge(
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: _currentSliderValue,
                     fontWeight: FontWeight.bold,
                   ),
                   child: Center(
@@ -156,9 +156,9 @@ class _MyHomePageState extends State<TextPage> {
           ),
           Slider(
             value: _currentSliderValue,
-            min: 14,
+            min: 12,
             max: 22,
-            divisions: 1,
+            divisions: 10,
             label: _currentSliderValue.round().toString(),
             onChanged: (double value) {
               setState(() {
