@@ -1,5 +1,6 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
+import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -13,6 +14,8 @@ class RouteGenerator {
       case '/select_clothe_type':
         return MaterialPageRoute(
             builder: (context) => const ClotheTypeScreen());
+      case '/select_material_screen':
+        return MaterialPageRoute(builder: (context) => const MaterialScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
