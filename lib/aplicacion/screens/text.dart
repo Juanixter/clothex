@@ -7,6 +7,8 @@ const List<Widget> partes = <Widget>[
   //Text('Pecho')
 ];
 
+String prenda = "Franela";
+
 void main() {
   runApp(const MyApp());
 }
@@ -59,103 +61,133 @@ class _MyHomePageState extends State<TextPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: DefaultTextStyle.merge(
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-                child: Center(
-                  child: Text(textito),
-                ),
-              ),
-            ),
-//            Padding(
-//              padding: const EdgeInsets.all(16.0),
-//              child: DefaultTextStyle.merge(
-//                style: const TextStyle(
-//                  fontSize: 24,
-//                  fontWeight: FontWeight.bold,
-//                ),
-//                child: Center(
-//                  child: Text(seleccion),
-//                ),
-//              ),
-//            ),
-            ToggleButtons(
-              direction: Axis.horizontal,
-              onPressed: (int index) {
-                setState(() {
-                  // The button that is tapped is set to true, and the others to false.
-
-                  for (int i = 0; i < _selectedPartes.length; i++) {
-                    _selectedPartes[i] = i == index;
-                    if (_selectedPartes[i]) {
-                      seleccion = partes[i].toString().split('"')[1];
-                      //"Mangas", "Pecho", "Espalda"
-                    }
-                  }
-                });
-              },
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              selectedBorderColor: Colors.red[700],
-              selectedColor: Colors.white,
-              fillColor: Colors.red[200],
-              color: Colors.red[400],
-              constraints: const BoxConstraints(
-                minHeight: 40.0,
-                minWidth: 80.0,
-              ),
-              isSelected: _selectedPartes,
-              children: partes,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: SizedBox(
-                width: 250,
-                child: TextField(
-                  controller: myController,
-                  obscureText: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Texto',
-                  ),
-                ),
-              ),
-            ),
-            TextButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return Colors.blue.withOpacity(0.04);
-                      }
-                      if (states.contains(MaterialState.focused) ||
-                          states.contains(MaterialState.pressed)) {
-                        return Colors.blue.withOpacity(0.12);
-                      }
-                      return null; // Defer to the widget's default.
-                    },
-                  ),
-                ),
-                onPressed: () {
-                  textito = myController.text;
-                  textinho(textito);
-                  //print(textito);
-                },
-                child: const Text('Enter')),
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
+        body: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          if (prenda == "Franela") {
+            return _buildForFranela();
+          } else {
+            return _buildForJean();
+          }
+        }));
+  }
+
+  Widget _buildForJean() {
+    return Padding(
+      padding: const EdgeInsets.all(50.0),
+      child: SizedBox(
+        width: 250,
+        child: TextField(
+          controller: myController,
+          obscureText: false,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Texto',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildForFranela() {
+    print("Here");
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Stack(fit: StackFit.loose, children: <Widget>[
+            Container(
+              color: Colors.blue,
+              width: 500,
+              height: 200,
+            ),
+            //Image.asset('assets/images/TShirt Example.//jpg'),
+            Positioned(
+              top: 100,
+              left: 68,
+              child: Container(
+                height: 25,
+                width: 87,
+                color: Colors.red,
+                child: DefaultTextStyle.merge(
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Center(
+                    child: Text(textito),
+                  ),
+                ),
+              ),
+            )
+          ]),
+          ToggleButtons(
+            direction: Axis.horizontal,
+            onPressed: (int index) {
+              setState(() {
+                // The button that is tapped is set to true, and the others to false.
+
+                for (int i = 0; i < _selectedPartes.length; i++) {
+                  _selectedPartes[i] = i == index;
+                  if (_selectedPartes[i]) {
+                    seleccion = partes[i].toString().split('"')[1];
+                    print(seleccion);
+                    //"Mangas", "Pecho", "Espalda"
+                  }
+                }
+              });
+            },
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            selectedBorderColor: Colors.red[700],
+            selectedColor: Colors.white,
+            fillColor: Colors.red[200],
+            color: Colors.red[400],
+            constraints: const BoxConstraints(
+              minHeight: 40.0,
+              minWidth: 80.0,
+            ),
+            isSelected: _selectedPartes,
+            children: partes,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: SizedBox(
+              width: 250,
+              child: TextField(
+                controller: myController,
+                obscureText: false,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Texto',
+                ),
+              ),
+            ),
+          ),
+          TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.hovered)) {
+                      return Colors.blue.withOpacity(0.04);
+                    }
+                    if (states.contains(MaterialState.focused) ||
+                        states.contains(MaterialState.pressed)) {
+                      return Colors.blue.withOpacity(0.12);
+                    }
+                    return null; // Defer to the widget's default.
+                  },
+                ),
+              ),
+              onPressed: () {
+                textito = myController.text;
+                textinho(textito);
+                //print(textito);
+              },
+              child: const Text('Enter')),
+        ],
       ),
     );
   }
