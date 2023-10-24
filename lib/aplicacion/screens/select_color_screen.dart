@@ -1,4 +1,3 @@
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SelectColorScreen extends StatefulWidget {
@@ -111,8 +110,7 @@ class _MyPageState extends State<SelectColorScreen> {
         children: [
           ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -132,9 +130,7 @@ class _MyPageState extends State<SelectColorScreen> {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-              ;
+              //TODO pasar a pantalla texto
             },
             icon: const Icon(Icons.arrow_forward, color: Colors.black),
             label: const Text(""),
