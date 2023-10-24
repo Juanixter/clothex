@@ -1,3 +1,4 @@
+import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 
@@ -9,31 +10,10 @@ const List<Widget> partes = <Widget>[
 
 String prenda = "Franela";
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 98, 54, 244)),
-        useMaterial3: true,
-      ),
-      home: const TextPage(title: 'Text Page'),
-    );
-  }
-}
-
 class TextPage extends StatefulWidget {
-  const TextPage({super.key, required this.title});
+  TextPage({super.key, required this.datos});
 
-  final String title;
+  Object? datos;
 
   @override
   State<TextPage> createState() => _MyHomePageState();
@@ -82,16 +62,22 @@ class _MyHomePageState extends State<TextPage> {
   }
 
   Widget _buildText() {
+    final mapa = widget.datos as Map<String, String>;
+    String? imgRoute = mapa['imagen'];
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          ColorFiltered(
+              colorFilter: ColorFilter.mode(primaryColor, BlendMode.color)),
           Stack(fit: StackFit.loose, children: <Widget>[
             Container(
               color: Colors.blue,
               width: 500,
               height: 200,
             ),
+            Image.asset(imgRoute!),
             //Image.asset('assets/images/TShirt Example.//jpg'),
             Positioned(
               top: 100,
@@ -154,17 +140,20 @@ class _MyHomePageState extends State<TextPage> {
               ),
             ),
           ),
-          Slider(
-            value: _currentSliderValue,
-            min: 12,
-            max: 22,
-            divisions: 10,
-            label: _currentSliderValue.round().toString(),
-            onChanged: (double value) {
-              setState(() {
-                _currentSliderValue = value;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Slider(
+              value: _currentSliderValue,
+              min: 12,
+              max: 22,
+              divisions: 10,
+              label: _currentSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _currentSliderValue = value;
+                });
+              },
+            ),
           ),
           TextButton(
               style: ButtonStyle(
@@ -204,8 +193,7 @@ class _MyHomePageState extends State<TextPage> {
         children: [
           ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.of(context).pushNamed('/select_color');
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -219,15 +207,13 @@ class _MyHomePageState extends State<TextPage> {
             style: TextButton.styleFrom(
               backgroundColor: Colors.transparent,
             ),
-            child: const Text("Texto 4/4",
+            child: const Text("Texto 3/3",
                 style: TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold)),
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-              ;
+              Navigator.of(context).pushNamed('/select_material_screen');
             },
             icon: const Icon(Icons.arrow_forward, color: Colors.black),
             label: const Text(""),
@@ -243,7 +229,9 @@ class _MyHomePageState extends State<TextPage> {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).popAndPushNamed('/home_screen');
+          },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.grey,
               shape: RoundedRectangleBorder(

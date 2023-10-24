@@ -130,7 +130,11 @@ class _MyPageState extends State<SelectColorScreen> {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              //TODO pasar a pantalla texto
+              final mapa = widget.datos as Map<String, String>;
+
+              mapa['color'] = primaryColor.toString();
+              mapa['imagen'] = 'assets/Images/product6.png';
+              Navigator.of(context).pushNamed('/text_page', arguments: mapa);
             },
             icon: const Icon(Icons.arrow_forward, color: Colors.black),
             label: const Text(""),
