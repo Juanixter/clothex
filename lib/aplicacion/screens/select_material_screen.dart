@@ -49,6 +49,8 @@ class _MaterialScreenState extends State<MaterialScreen> {
 
     mapa['material'] = material;
     mapa['talla'] = talla;
+
+    Navigator.of(context).pushNamed('/select_color', arguments: mapa);
   }
 
   Widget build(BuildContext context) {

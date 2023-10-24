@@ -19,7 +19,10 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => MaterialScreen(datos: args));
       case '/select_color':
-        return MaterialPageRoute(builder: (context) => SelectColorScreen());
+        return MaterialPageRoute(
+            builder: (context) => SelectColorScreen(
+                  datos: args,
+                ));
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
