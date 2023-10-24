@@ -18,7 +18,7 @@ class RouteGenerator {
       case '/select_material_screen':
         return MaterialPageRoute(builder: (context) => const MaterialScreen());
 
-      case 'select_pattern_screen':
+      case '/select_pattern_screen':
         return MaterialPageRoute(builder: (context) => SelectPatternScreen());
 
       default:

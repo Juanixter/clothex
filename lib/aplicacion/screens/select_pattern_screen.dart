@@ -21,7 +21,7 @@ List<Color> myColors = <Color>[
 Color primaryColor = myColors[0];
 
 class _MyPageState extends State<SelectPatternScreen> {
-  Pattern pattern = Dots(bgColor: Colors.white, fgColor: primaryColor);
+  Pattern pattern = Dots(bgColor: Colors.white, fgColor: Colors.transparent);
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +52,19 @@ class _MyPageState extends State<SelectPatternScreen> {
   Widget buildImage() => Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: CustomPaint(
-          painter: MyPainter(pattern),
-          child: Image.asset(
-            "assets/Images/product6.png",
-            fit: BoxFit.contain,
+          child: CustomPaint(
+            painter: MyPainter(pattern),
+            child: Image.asset(
+              "assets/Images/product6.png",
+              fit: BoxFit.contain,
+            ),
           ),
-        ),
       );
 
   Widget buildColorIcons() => Positioned(
         bottom: 35,
-        right: 10,
+        right: 304,
+        left: 304,
         child: Row(
           children: [
             for (var i = 0; i < myColors.length; i++) buildIconBtn(myColors[i]),
@@ -71,16 +72,15 @@ class _MyPageState extends State<SelectPatternScreen> {
         ),
       );
 
-  Widget buildIconBtn(Color myColor) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
+  Widget buildIconBtn(Color myColor) => Center(
         child: Stack(
           children: [
             Positioned(
-              top: 20,
-              left: 12.5,
+              top: 12,
+              right: 12,
               child: Icon(
                 Icons.check,
-                size: 20,
+                size: 16,
                 color: primaryColor == myColor ? myColor : Colors.transparent,
               ),
             ),
@@ -88,7 +88,7 @@ class _MyPageState extends State<SelectPatternScreen> {
               icon: Icon(
                 Icons.circle,
                 color: myColor.withOpacity(1),
-                size: 30,
+                size: 25,
               ),
               onPressed: () {
                 setState(() {
@@ -96,25 +96,25 @@ class _MyPageState extends State<SelectPatternScreen> {
 
                   if (primaryColor == Colors.red) {
                     pattern =
-                        Dots(bgColor: Colors.white, fgColor: primaryColor);
+                        Dots(bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.blue) {
                     pattern = VerticalStripesLight(
-                        bgColor: Colors.white, fgColor: primaryColor);
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.green) {
                     pattern = HorizontalStripesLight(
-                        bgColor: Colors.white, fgColor: primaryColor);
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.purple) {
                     pattern = HorizontalStripesLight(
-                        bgColor: Colors.white, fgColor: primaryColor);
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.orange) {
                     pattern = VerticalStripesLight(
-                        bgColor: Colors.white, fgColor: primaryColor);
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.yellow) {
                     pattern =
-                        Dots(bgColor: Colors.white, fgColor: primaryColor);
+                        Dots(bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.black) {
                     pattern =
-                        Dots(bgColor: Colors.white, fgColor: Colors.white);
+                        Dots(bgColor: Colors.transparent, fgColor: Colors.white);
                   }
                 });
               },
@@ -166,8 +166,8 @@ class _MyPageState extends State<SelectPatternScreen> {
 
   Widget buildConfirm() => Positioned(
         bottom: 8,
-        right: 16,
-        left: 16,
+        right: 305,
+        left: 305,
         child: ElevatedButton(
           onPressed: () {
             // Handle the confirmation action
@@ -199,10 +199,10 @@ class MyPainter extends CustomPainter {
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
     // Set the blend mode for the Paint object
-    Paint paint = Paint()..blendMode = BlendMode.modulate;
+    Paint paint = Paint()..blendMode = BlendMode.color;
 
     // Paint the pattern on the canvas
-    pattern.paintOnRect(canvas, size, rect);
+    pattern.paintOnRect(canvas, size, rect);;
   }
 
   @override
