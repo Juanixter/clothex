@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 
 const List<Widget> partes = <Widget>[
   Text('Mangas'),
   Text('Torso'),
   Text('Espalda'),
-  //Text('Pecho')
 ];
 
 String prenda = "Franela";
@@ -44,6 +44,7 @@ class _MyHomePageState extends State<TextPage> {
   String seleccion = "test";
   String textito = "";
   TextEditingController myController = TextEditingController();
+  double _currentSliderValue = 20;
 
   void textinho(String s) {
     setState(() {
@@ -62,37 +63,25 @@ class _MyHomePageState extends State<TextPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          if (prenda == "Franela") {
-            return _buildForFranela();
-          } else {
-            return _buildForJean();
-          }
-        }));
-  }
-
-  Widget _buildForJean() {
-    return Padding(
-      padding: const EdgeInsets.all(50.0),
-      child: SizedBox(
-        width: 250,
-        child: TextField(
-          controller: myController,
-          obscureText: false,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Texto',
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Clothex App',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 30,
+            ),
           ),
         ),
-      ),
-    );
+        body: Center(
+          child: Stack(children: [
+            _buildText(),
+            _buildArrows(),
+            _buildConfirm(),
+          ]),
+        ));
   }
 
-  Widget _buildForFranela() {
-    print("Here");
+  Widget _buildText() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -152,7 +141,7 @@ class _MyHomePageState extends State<TextPage> {
             children: partes,
           ),
           Padding(
-            padding: const EdgeInsets.all(50.0),
+            padding: const EdgeInsets.all(15.0),
             child: SizedBox(
               width: 250,
               child: TextField(
@@ -164,6 +153,18 @@ class _MyHomePageState extends State<TextPage> {
                 ),
               ),
             ),
+          ),
+          Slider(
+            value: _currentSliderValue,
+            min: 14,
+            max: 22,
+            divisions: 1,
+            label: _currentSliderValue.round().toString(),
+            onChanged: (double value) {
+              setState(() {
+                _currentSliderValue = value;
+              });
+            },
           ),
           TextButton(
               style: ButtonStyle(
@@ -191,4 +192,70 @@ class _MyHomePageState extends State<TextPage> {
       ),
     );
   }
+
+  Widget _buildArrows() => Positioned(
+      bottom: 74,
+      right: 305,
+      left: 305,
+      child: ButtonBar(
+        alignment: MainAxisAlignment.spaceBetween,
+        buttonMinWidth: 80.0, // Adjust the minimum widtof buttons
+        buttonHeight: 40.0, // Adjust the height of buttons
+        children: [
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            label: const Text(""),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+          ),
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.transparent,
+            ),
+            child: const Text("Texto 4/4",
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              ;
+            },
+            icon: const Icon(Icons.arrow_forward, color: Colors.black),
+            label: const Text(""),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+          ),
+        ],
+      ));
+
+  Widget _buildConfirm() => Positioned(
+      bottom: 0.5,
+      right: 305,
+      left: 305,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              )),
+          child: const Text(
+            'Confirm',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ));
 }
