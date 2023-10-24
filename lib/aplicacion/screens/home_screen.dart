@@ -1,5 +1,6 @@
 import 'package:clothex_app/aplicacion/Widgets/clothex_bottom_bar.dart';
 import 'package:clothex_app/aplicacion/screens/in_progress_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
