@@ -21,15 +21,44 @@ class TextPage extends StatefulWidget {
 
 class _MyHomePageState extends State<TextPage> {
   final List<bool> _selectedPartes = <bool>[true, false, false];
-  String seleccion = "test";
+  String seleccion = "Mangas";
   String textito = "";
+  String textoEspalda = "";
+  String textoMangas = "";
   TextEditingController myController = TextEditingController();
   double _currentSliderValue = 12;
 
-  void textinho(String s) {
+  void textinho(String s, String seleccion) {
     setState(() {
-      textito = s;
+      print("Seleccion:   " + seleccion);
+      if (seleccion == "Torso") {
+        print("chest");
+        textito = s;
+      } else if (seleccion == "Espalda") {
+        print("back");
+        textoEspalda = s;
+      } else {
+        print("sleeves");
+        textoMangas = s;
+      }
+
       myController.text = "";
+    });
+  }
+
+  void moving(String seleccion) {
+    setState(() {
+      String s = textoEspalda + textito + textoMangas;
+      textito = "";
+      textoEspalda = "";
+      textoMangas = "";
+      if (seleccion == "Torso") {
+        textito = s;
+      } else if (seleccion == "Espalda") {
+        textoEspalda = s;
+      } else {
+        textoMangas = s;
+      }
     });
   }
 
@@ -72,20 +101,14 @@ class _MyHomePageState extends State<TextPage> {
           ColorFiltered(
               colorFilter: ColorFilter.mode(primaryColor, BlendMode.color)),
           Stack(fit: StackFit.loose, children: <Widget>[
-            Container(
-              color: Colors.blue,
-              width: 500,
-              height: 200,
-            ),
             Image.asset(imgRoute!),
-            //Image.asset('assets/images/TShirt Example.//jpg'),
             Positioned(
               top: 100,
-              left: 68,
+              left: 95,
               child: Container(
                 height: 25,
-                width: 87,
-                color: Colors.red,
+                width: 97,
+                //color: Colors.red,
                 child: DefaultTextStyle.merge(
                   style: TextStyle(
                     fontSize: _currentSliderValue,
@@ -96,14 +119,48 @@ class _MyHomePageState extends State<TextPage> {
                   ),
                 ),
               ),
+            ),
+            Positioned(
+              top: 100,
+              left: 517,
+              child: Container(
+                height: 25,
+                width: 110,
+                //color: Colors.red,
+                child: DefaultTextStyle.merge(
+                  style: TextStyle(
+                    fontSize: _currentSliderValue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Center(
+                    child: Text(textoEspalda),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 100,
+              left: 308,
+              child: Container(
+                height: 25,
+                width: 110,
+                //color: Colors.red,
+                child: DefaultTextStyle.merge(
+                  style: TextStyle(
+                    fontSize: _currentSliderValue - 7,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Center(
+                    child: Text(textoMangas),
+                  ),
+                ),
+              ),
             )
           ]),
           ToggleButtons(
             direction: Axis.horizontal,
             onPressed: (int index) {
               setState(() {
-                // The button that is tapped is set to true, and the others to false.
-
                 for (int i = 0; i < _selectedPartes.length; i++) {
                   _selectedPartes[i] = i == index;
                   if (_selectedPartes[i]) {
@@ -112,6 +169,7 @@ class _MyHomePageState extends State<TextPage> {
                     //"Mangas", "Pecho", "Espalda"
                   }
                 }
+                moving(seleccion);
               });
             },
             borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -120,19 +178,21 @@ class _MyHomePageState extends State<TextPage> {
             fillColor: Colors.red[200],
             color: Colors.red[400],
             constraints: const BoxConstraints(
-              minHeight: 40.0,
+              minHeight: 30.0,
               minWidth: 80.0,
             ),
             isSelected: _selectedPartes,
             children: partes,
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
             child: SizedBox(
               width: 250,
+              height: 60,
               child: TextField(
                 controller: myController,
                 obscureText: false,
+                maxLength: 8,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Texto',
@@ -141,49 +201,54 @@ class _MyHomePageState extends State<TextPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Slider(
-              value: _currentSliderValue,
-              min: 12,
-              max: 22,
-              divisions: 10,
-              label: _currentSliderValue.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _currentSliderValue = value;
-                });
-              },
-            ),
-          ),
-          TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.blue.withOpacity(0.04);
-                    }
-                    if (states.contains(MaterialState.focused) ||
-                        states.contains(MaterialState.pressed)) {
-                      return Colors.blue.withOpacity(0.12);
-                    }
-                    return null; // Defer to the widget's default.
-                  },
+              padding: const EdgeInsets.symmetric(horizontal: 350, vertical: 5),
+              child: SizedBox(
+                height: 10,
+                child: Slider(
+                    value: _currentSliderValue,
+                    min: 12,
+                    max: 22,
+                    divisions: 10,
+                    label: _currentSliderValue.round().toString(),
+                    onChanged: (double value) {
+                      setState(() {
+                        _currentSliderValue = value;
+                      });
+                    }),
+              )),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.blue.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.blue.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
                 ),
-              ),
-              onPressed: () {
-                textito = myController.text;
-                textinho(textito);
-                //print(textito);
-              },
-              child: const Text('Enter')),
+                onPressed: () {
+                  textito = myController.text;
+                  textinho(textito, seleccion);
+                  //print(textito);
+                },
+                child: const Text('Enter')),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildArrows() => Positioned(
-      bottom: 74,
+      bottom: 44,
       right: 305,
       left: 305,
       child: ButtonBar(
