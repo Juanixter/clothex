@@ -96,7 +96,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.transparent,
                       ),
-                      child: const Text("Material 1/4",
+                      child: const Text("Material 1/3",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold)),

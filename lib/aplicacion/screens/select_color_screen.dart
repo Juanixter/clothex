@@ -124,7 +124,7 @@ class _MyPageState extends State<SelectColorScreen> {
             style: TextButton.styleFrom(
               backgroundColor: Colors.transparent,
             ),
-            child: const Text("Color 2/4",
+            child: const Text("Color 2/3",
                 style: TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold)),
           ),
