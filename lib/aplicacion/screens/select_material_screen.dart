@@ -1,8 +1,9 @@
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MaterialScreen extends StatefulWidget {
-  const MaterialScreen({super.key});
+  final Object? datos;
+
+  const MaterialScreen({required this.datos, super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,34 +26,38 @@ const List<Widget> materials = <Widget>[
   Text('Dri-Fit'),
   Text('Lino'),
   Text('Poliéster'),
-  Text('Seda'),
 ];
 
 @override
 class _MaterialScreenState extends State<MaterialScreen> {
-  final List<bool> _toggleButtonsSelection =
-      ShirtSize.values.map((ShirtSize e) => e == ShirtSize.medium).toList();
-  final List<bool> _selectedMaterials = <bool>[
+  final List<bool> _toggleButtonsSelection = <bool>[
     true,
     false,
     false,
     false,
     false
   ];
+  final List<bool> _selectedMaterials = <bool>[true, false, false, false];
 
-  void _saveToggleButtonsValues() {
-    // Save the values of the toggle buttons here
-    // You can access the selected values using _selectedMaterials and _toggleButtonsSelection lists
-    // Perform any necessary operations with the selected values
-    // For example, you can print them to the console
-    print('Selected materials: $_selectedMaterials');
-    print('Selected shirt sizes: $_toggleButtonsSelection');
+  void nextScreen() {
+    final mapa = widget.datos as Map<String, String>;
+    int materialIndex = _selectedMaterials.indexOf(true);
+    int sizeIndex = _toggleButtonsSelection.indexOf(true);
+
+    String material = materials[materialIndex].toString();
+    String talla = shirtSizeOptions[sizeIndex].$2;
+
+    mapa['material'] = material;
+    mapa['talla'] = talla;
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white,
+            iconTheme: const IconThemeData().copyWith(
+              color: Colors.black,
+            ),
             title: const Text('Clothex App',
                 style: TextStyle(color: Colors.black, fontSize: 30))),
         body: Container(
@@ -74,16 +79,11 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   buttonMinWidth: 80.0, // Adjust the minimum width of buttons
                   buttonHeight: 40.0, // Adjust the height of buttons
                   children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                      },
+                    TextButton.icon(
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.arrow_back,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       label: const Text(""),
                       style: ElevatedButton.styleFrom(
@@ -100,12 +100,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                               fontWeight: FontWeight.bold)),
                     ),
                     ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
-                      },
+                      onPressed: nextScreen,
                       icon:
                           const Icon(Icons.arrow_forward, color: Colors.black),
                       label: const Text(""),
@@ -146,11 +141,16 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: ToggleButtons(
+                        fillColor: Colors.blue[200],
+                        selectedColor: Colors.white,
                         isSelected: _toggleButtonsSelection,
                         onPressed: (int index) {
                           setState(() {
-                            _toggleButtonsSelection[index] =
-                                !_toggleButtonsSelection[index];
+                            for (int i = 0;
+                                i < _toggleButtonsSelection.length;
+                                i++) {
+                              _toggleButtonsSelection[i] = i == index;
+                            }
                           });
                         },
                         constraints: const BoxConstraints(
@@ -162,27 +162,6 @@ class _MaterialScreenState extends State<MaterialScreen> {
                             .toList(),
                       )),
                 ),
-                Flexible(
-                    child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _saveToggleButtonsValues();
-                    },
-                    child: const Text(
-                      'Confirm',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        )),
-                  ),
-                )),
               ],
             ),
           ),
