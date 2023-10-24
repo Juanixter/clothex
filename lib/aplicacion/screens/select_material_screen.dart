@@ -1,5 +1,4 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
-import 'package:clothex_app/aplicacion/screens/pattern_screen.dart';
 import 'package:flutter/material.dart';
 
 class MaterialScreen extends StatefulWidget {
@@ -22,7 +21,7 @@ const List<(ShirtSize, String)> shirtSizeOptions = <(ShirtSize, String)>[
 ];
 
 const List<Widget> materials = <Widget>[
-  Text('Algodon'),
+  Text('Algodón'),
   Text('Dri-Fit'),
   Text('Lino'),
   Text('Poliéster'),
@@ -105,7 +104,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SelectPatternScreen()));
+                                builder: (context) => HomeScreen()));
                       },
                       icon:
                           const Icon(Icons.arrow_forward, color: Colors.black),
