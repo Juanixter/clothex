@@ -10,6 +10,14 @@ class ClotheTypeScreen extends StatefulWidget {
 
 class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
   int currentIndex = 0;
+  Map<String, String> datos = {
+    "tipo": '',
+    "material": '',
+    "talla": '',
+    "color": '',
+    "patron": '',
+    "texto": '',
+  };
 
   void changeType(int collectionIndex) {
     setState(() {
@@ -73,7 +81,13 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                 backgroundColor: Colors.white,
                                 padding: const EdgeInsets.all(10),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                datos['tipo'] = snapshot.data?[index]['nombre'];
+                                Navigator.of(context).pushNamed(
+                                  '/select_material_screen',
+                                  arguments: datos,
+                                );
+                              },
                               child: Row(
                                 children: [
                                   SizedBox(
