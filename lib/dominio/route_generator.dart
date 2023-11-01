@@ -1,3 +1,4 @@
+import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
 import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
@@ -23,6 +24,8 @@ class RouteGenerator {
             builder: (context) => SelectColorScreen(
                   datos: args,
                 ));
+      case '/checkout_screen':
+        return MaterialPageRoute(builder: (context) => CheckoutScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
