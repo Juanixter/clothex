@@ -28,6 +28,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey[100],
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData().copyWith(
@@ -43,23 +44,47 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
             if (snapshot.hasData) {
               return Column(
                 children: [
-                  SingleChildScrollView(
-                    child: Row(
+                  SizedBox(
+                    height: 60,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: [
-                        ...snapshot.data!.map((tipo) {
-                          //Añadiendo cada tipo en orden
-                          indexList.add(tipo['nombre']);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: OutlinedButton(
-                              onPressed: () {
-                                int index = indexList.indexOf(tipo['nombre']);
-                                changeType(index);
-                              },
-                              child: Text(tipo['nombre']),
-                            ),
-                          );
-                        }).toList(),
+                        ...snapshot.data!.map(
+                          (tipo) {
+                            //Añadiendo cada tipo en orden
+                            indexList.add(tipo['nombre']);
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 10,
+                              ),
+                              child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor:
+                                      indexList.indexOf(tipo['nombre']) ==
+                                              currentIndex
+                                          ? Colors.green[200]
+                                          : Colors.white,
+                                  side: const BorderSide(width: 1.5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  int index = indexList.indexOf(tipo['nombre']);
+                                  changeType(index);
+                                },
+                                child: Text(
+                                  tipo['nombre'],
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ).toList(),
                       ],
                     ),
                   ),
@@ -68,41 +93,47 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          padding: const EdgeInsets.all(10),
                           shrinkWrap: true,
                           itemCount: snapshot.data?.length,
                           itemBuilder: (context, index) {
-                            return ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                foregroundColor: Colors.black,
-                                backgroundColor: Colors.white,
-                                padding: const EdgeInsets.all(10),
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 7,
                               ),
-                              onPressed: () {
-                                datos['tipo'] = snapshot.data?[index]['nombre'];
-                                Navigator.of(context).pushNamed(
-                                  '/select_material_screen',
-                                  arguments: datos,
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 150,
-                                    height: 150,
-                                    child: Image.network(
-                                      snapshot.data?[index]['imagen'],
-                                      fit: BoxFit.contain,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  foregroundColor: Colors.black,
+                                  backgroundColor: Colors.white,
+                                  padding: const EdgeInsets.all(10),
+                                ),
+                                onPressed: () {},
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 150,
+                                      height: 150,
+                                      child: Image.network(
+                                        snapshot.data?[index]['imagen'],
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    snapshot.data?[index]['nombre'],
-                                  ),
-                                ],
+                                    const Spacer(),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        snapshot.data?[index]['nombre'],
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
