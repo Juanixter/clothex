@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^4.11.0
   patterns_canvas: ^0.4.0
   confetti:  ^0.6.0
+  firebase_auth: ^4.12.1
 
   
 
@@ -68,6 +69,8 @@ flutter:
   assets:
    - assets/Images/product6.png
    - assets/Images/checkmark.png
+   - assets/Images/clothex_logo.jpg
+  
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
