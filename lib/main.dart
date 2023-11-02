@@ -12,6 +12,7 @@ void main() async {
   );
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Clothex App',
       themeMode: ThemeMode.system,
       theme: ThemeData().copyWith(
