@@ -1,6 +1,7 @@
 import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 // ignore: must_be_immutable
 class DesignScreen extends StatefulWidget {
@@ -15,15 +16,131 @@ class DesignScreen extends StatefulWidget {
 class _DesignScreenState extends State<DesignScreen> {
   final _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
-  Color primaryColor = Colors.white;
 
   void onDataChanged(Map<String, dynamic> nuevosDatos) {
-    primaryColor = nuevosDatos['color'];
     setState(() => widget.datos = nuevosDatos);
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget layoutType;
+    if (kIsWeb) {
+      layoutType = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    style: IconButton.styleFrom(
+                      foregroundColor:
+                          currentIndex == 0 ? Colors.white : Colors.black,
+                    ),
+                    onPressed: () {
+                      if (currentIndex != 0) {
+                        _pageController.animateToPage(currentIndex - 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                Text(
+                  '',
+                  style: const TextStyle()
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                    onPressed: () {
+                      if (currentIndex != 2) {
+                        _pageController.animateToPage(currentIndex + 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios_rounded)),
+              ],
+            ),
+          ),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              children: [
+                MaterialScreen(
+                    datos: widget.datos, onDataChange: onDataChanged),
+                SelectColorScreen(
+                    datos: widget.datos, onDataChange: onDataChanged),
+              ],
+            ),
+          ),
+        ],
+      );
+    } else {
+      layoutType = Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    style: IconButton.styleFrom(
+                      foregroundColor:
+                          currentIndex == 0 ? Colors.white : Colors.black,
+                    ),
+                    onPressed: () {
+                      if (currentIndex != 0) {
+                        _pageController.animateToPage(currentIndex - 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                Text(
+                  '',
+                  style: const TextStyle()
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                    onPressed: () {
+                      if (currentIndex != 2) {
+                        _pageController.animateToPage(currentIndex + 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios_rounded)),
+              ],
+            ),
+          ),
+          PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            children: [
+              MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
+              SelectColorScreen(
+                  datos: widget.datos, onDataChange: onDataChanged),
+            ],
+          ),
+        ],
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
@@ -54,7 +171,8 @@ class _DesignScreenState extends State<DesignScreen> {
                   width: (MediaQuery.of(context).size.width / 2) - 10,
                   child: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                        primaryColor.withOpacity(0.5), BlendMode.srcATop),
+                        widget.datos['color'].withOpacity(0.5),
+                        BlendMode.srcATop),
                     child: widget.datos['img_front'],
                   ),
                 ),
@@ -65,7 +183,8 @@ class _DesignScreenState extends State<DesignScreen> {
                   width: (MediaQuery.of(context).size.width / 2) - 10,
                   child: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                        primaryColor.withOpacity(0.5), BlendMode.srcATop),
+                        widget.datos['color'].withOpacity(0.5),
+                        BlendMode.srcATop),
                     child: widget.datos['img_back'],
                   ),
                 ),
@@ -73,48 +192,7 @@ class _DesignScreenState extends State<DesignScreen> {
             ),
           ),
           Expanded(
-            child: Stack(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          style: IconButton.styleFrom(
-                            foregroundColor:
-                                currentIndex == 0 ? Colors.white : Colors.black,
-                          ),
-                          onPressed: () {},
-                          icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                      Text(
-                        '',
-                        style: const TextStyle().copyWith(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.arrow_forward_ios_rounded)),
-                    ],
-                  ),
-                ),
-                PageView(
-                  controller: _pageController,
-                  onPageChanged: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                  children: [
-                    MaterialScreen(
-                        datos: widget.datos, onDataChange: onDataChanged),
-                    SelectColorScreen(
-                        datos: widget.datos, onDataChange: onDataChanged),
-                  ],
-                ),
-              ],
-            ),
+            child: layoutType,
           ),
         ],
       ),

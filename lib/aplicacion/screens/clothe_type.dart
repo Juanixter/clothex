@@ -121,6 +121,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                         snapshot.data?[index]['nombre'];
                                     datos['img_front'] = front;
                                     datos['img_back'] = back;
+                                    datos['color'] = Colors.white;
                                     Navigator.of(context).pushNamed(
                                         '/design_screen',
                                         arguments: datos);
