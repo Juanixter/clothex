@@ -10,13 +10,10 @@ class ClotheTypeScreen extends StatefulWidget {
 
 class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
   int currentIndex = 0;
-  Map<String, String> datos = {
+  Map<String, dynamic> datos = {
     "tipo": '',
-    "material": '',
-    "talla": '',
-    "color": '',
-    "patron": '',
-    "texto": '',
+    "img_front": null,
+    "img_back": null,
   };
 
   void changeType(int collectionIndex) {
@@ -92,51 +89,69 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                     future: getClotheSubtypes(currentIndex),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return ListView.builder(
-                          padding: const EdgeInsets.all(10),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data?.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 7,
-                              ),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  foregroundColor: Colors.black,
-                                  backgroundColor: Colors.white,
-                                  padding: const EdgeInsets.all(10),
+                        return Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(10),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data?.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 7,
                                 ),
-                                onPressed: () {},
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 150,
-                                      height: 150,
-                                      child: Image.network(
-                                        snapshot.data?[index]['imagen'],
-                                        fit: BoxFit.contain,
-                                      ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    const Spacer(),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        snapshot.data?[index]['nombre'],
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
+                                    foregroundColor: Colors.black,
+                                    backgroundColor: Colors.white,
+                                    padding: const EdgeInsets.all(10),
+                                  ),
+                                  onPressed: () {
+                                    Widget front = Image.network(
+                                      snapshot.data?[index]['img_front'],
+                                      fit: BoxFit.contain,
+                                    );
+                                    Widget back = Image.network(
+                                      snapshot.data?[index]['img_back'],
+                                      fit: BoxFit.contain,
+                                    );
+                                    datos['tipo'] =
+                                        snapshot.data?[index]['nombre'];
+                                    datos['img_front'] = front;
+                                    datos['img_back'] = back;
+                                    Navigator.of(context).pushNamed(
+                                        '/design_screen',
+                                        arguments: datos);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 150,
+                                        height: 150,
+                                        child: Image.network(
+                                          snapshot.data?[index]['img_front'],
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      const Spacer(),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          snapshot.data?[index]['nombre'],
+                                          style: const TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         );
                       } else {
                         return const Text('');

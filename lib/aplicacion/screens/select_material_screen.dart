@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MaterialScreen extends StatefulWidget {
-  final Object? datos;
+  final Map<String, dynamic> datos;
 
-  const MaterialScreen({required this.datos, super.key});
+  final Function onDataChange;
+
+  const MaterialScreen(
+      {required this.datos, required this.onDataChange, super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -39,134 +42,78 @@ class _MaterialScreenState extends State<MaterialScreen> {
   ];
   final List<bool> _selectedMaterials = <bool>[true, false, false, false];
 
-  void nextScreen() {
-    final mapa = widget.datos as Map<String, String>;
+  void onSelection() {
     int materialIndex = _selectedMaterials.indexOf(true);
     int sizeIndex = _toggleButtonsSelection.indexOf(true);
 
     String material = materials[materialIndex].toString();
     String talla = shirtSizeOptions[sizeIndex].$2;
 
-    mapa['material'] = material;
-    mapa['talla'] = talla;
+    widget.datos['material'] = material;
+    widget.datos['talla'] = talla;
 
-    Navigator.of(context).pushNamed('/select_color', arguments: mapa);
+    widget.onDataChange(widget.datos);
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData().copyWith(
-              color: Colors.black,
-            ),
-            title: const Text('Clothex App',
-                style: TextStyle(color: Colors.black, fontSize: 30))),
-        body: Container(
-          color: Colors.white,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  flex: 5,
-                  child: Image.asset(
-                    "assets/Images/product6.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                Flexible(
-                    child: ButtonBar(
-                  alignment: MainAxisAlignment.spaceBetween,
-                  buttonMinWidth: 80.0, // Adjust the minimum width of buttons
-                  buttonHeight: 40.0, // Adjust the height of buttons
-                  children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                      label: const Text(""),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                      ),
-                      child: const Text("Material 1/3",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: nextScreen,
-                      icon:
-                          const Icon(Icons.arrow_forward, color: Colors.black),
-                      label: const Text(""),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white),
-                    ),
-                  ],
-                )),
-                Flexible(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ToggleButtons(
-                        onPressed: (int index) {
-                          setState(() {
-                            // The button that is tapped is set to true, and the others to false.
-                            for (int i = 0;
-                                i < _selectedMaterials.length;
-                                i++) {
-                              _selectedMaterials[i] = i == index;
-                            }
-                          });
-                        },
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
-                        selectedBorderColor: Colors.grey,
-                        selectedColor: Colors.white,
-                        fillColor: Colors.blue[200],
-                        color: Colors.black,
-                        constraints: const BoxConstraints(
-                          minHeight: 40.0,
-                          minWidth: 80.0,
-                        ),
-                        isSelected: _selectedMaterials,
-                        children: materials,
-                      )),
-                ),
-                Flexible(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ToggleButtons(
-                        fillColor: Colors.blue[200],
-                        selectedColor: Colors.white,
-                        isSelected: _toggleButtonsSelection,
-                        onPressed: (int index) {
-                          setState(() {
-                            for (int i = 0;
-                                i < _toggleButtonsSelection.length;
-                                i++) {
-                              _toggleButtonsSelection[i] = i == index;
-                            }
-                          });
-                        },
-                        constraints: const BoxConstraints(
-                          minHeight: 32.0,
-                          minWidth: 56.0,
-                        ),
-                        children: shirtSizeOptions
-                            .map(((ShirtSize, String) shirt) => Text(shirt.$2))
-                            .toList(),
-                      )),
-                ),
-              ],
-            ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+          child: Text(
+            'Material y Talla',
+            style: const TextStyle()
+                .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-        ));
+        ),
+        Flexible(
+          child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: ToggleButtons(
+                onPressed: (int index) {
+                  // The button that is tapped is set to true, and the others to false.
+                  for (int i = 0; i < _selectedMaterials.length; i++) {
+                    _selectedMaterials[i] = i == index;
+                  }
+                  onSelection();
+                },
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                selectedBorderColor: Colors.grey,
+                selectedColor: Colors.white,
+                fillColor: Colors.blue[200],
+                color: Colors.black,
+                constraints: const BoxConstraints(
+                  minHeight: 40.0,
+                  minWidth: 80.0,
+                ),
+                isSelected: _selectedMaterials,
+                children: materials,
+              )),
+        ),
+        Flexible(
+          child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: ToggleButtons(
+                fillColor: Colors.blue[200],
+                selectedColor: Colors.white,
+                isSelected: _toggleButtonsSelection,
+                onPressed: (int index) {
+                  for (int i = 0; i < _toggleButtonsSelection.length; i++) {
+                    _toggleButtonsSelection[i] = i == index;
+                  }
+                  onSelection();
+                },
+                constraints: const BoxConstraints(
+                  minHeight: 32.0,
+                  minWidth: 56.0,
+                ),
+                children: shirtSizeOptions
+                    .map(((ShirtSize, String) shirt) => Text(shirt.$2))
+                    .toList(),
+              )),
+        ),
+      ],
+    );
   }
 }

@@ -1,8 +1,6 @@
+import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
-import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
-import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
-import 'package:clothex_app/aplicacion/screens/text.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -16,17 +14,18 @@ class RouteGenerator {
       case '/select_clothe_type':
         return MaterialPageRoute(
             builder: (context) => const ClotheTypeScreen());
-      case '/select_material_screen':
+      case '/design_screen':
         return MaterialPageRoute(
-            builder: (context) => MaterialScreen(datos: args));
-      case '/select_color':
-        return MaterialPageRoute(
-            builder: (context) => SelectColorScreen(
-                  datos: args,
-                ));
-
-      case '/text_page':
-        return MaterialPageRoute(builder: (context) => TextPage(datos: args));
+            builder: (context) =>
+                DesignScreen(datos: args as Map<String, dynamic>));
+      // case '/select_material_screen':
+      //   return MaterialPageRoute(
+      //       builder: (context) => MaterialScreen(datos: args));
+      // case '/select_color':
+      //   return MaterialPageRoute(
+      //       builder: (context) => SelectColorScreen(datos: args));
+      // case '/text_page':
+      //   return MaterialPageRoute(builder: (context) => TextPage(datos: args));
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());

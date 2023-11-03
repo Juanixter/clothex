@@ -1,9 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class SelectColorScreen extends StatefulWidget {
-  final Object? datos;
+  final Map<String, dynamic> datos;
+  final Function onDataChange;
 
-  const SelectColorScreen({super.key, required this.datos});
+  const SelectColorScreen({
+    super.key,
+    required this.datos,
+    required this.onDataChange,
+  });
 
   @override
   _MyPageState createState() => _MyPageState();
@@ -17,6 +24,7 @@ List mycolors = <Color>[
   Colors.purple,
   Colors.orange,
   Colors.yellow,
+  Colors.black
 ];
 
 Color primaryColor = mycolors[0];
@@ -24,35 +32,71 @@ Color primaryColor = mycolors[0];
 class _MyPageState extends State<SelectColorScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Clothex App',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 30,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+          child: Text(
+            'Colores',
+            style: const TextStyle()
+                .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-      ),
-      body: Center(
-        child: Center(
-          child: Stack(
+        Flexible(
+          fit: FlexFit.loose,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildImage(),
-              buildArrows(),
-              buildColorIcons(),
-              buildConfirm(),
+              ...mycolors.take(4).map(
+                (color) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      style: IconButton.styleFrom(iconSize: 50),
+                      color: color,
+                      onPressed: () {
+                        widget.datos['color'] = color;
+                        widget.onDataChange(widget.datos);
+                      },
+                      icon: const Icon(Icons.circle),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
-      ),
+        Flexible(
+          fit: FlexFit.loose,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ...mycolors.getRange(4, 7).map(
+                (color) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      style: IconButton.styleFrom(iconSize: 50),
+                      color: color,
+                      onPressed: () {
+                        widget.datos['color'] = color;
+                        widget.onDataChange(widget.datos);
+                      },
+                      icon: const Icon(Icons.circle),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   Widget buildImage() => Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: 200,
+        height: 200,
         child: ColorFiltered(
           colorFilter: ColorFilter.mode(primaryColor, BlendMode.color),
           child: Container(

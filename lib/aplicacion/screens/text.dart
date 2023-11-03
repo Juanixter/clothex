@@ -1,6 +1,5 @@
 import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 
 const List<Widget> partes = <Widget>[
   Text('Mangas'),
@@ -10,10 +9,12 @@ const List<Widget> partes = <Widget>[
 
 String prenda = "Franela";
 
+// ignore: must_be_immutable
 class TextPage extends StatefulWidget {
-  TextPage({super.key, required this.datos});
-
+  final Function onDataChange;
   Object? datos;
+
+  TextPage({super.key, required this.datos, required this.onDataChange});
 
   @override
   State<TextPage> createState() => _MyHomePageState();
