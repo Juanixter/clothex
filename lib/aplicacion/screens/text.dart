@@ -2,7 +2,6 @@ import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:flutter/material.dart';
 
 const List<Widget> partes = <Widget>[
-  Text('Mangas'),
   Text('Torso'),
   Text('Espalda'),
 ];
@@ -21,11 +20,10 @@ class TextPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TextPage> {
-  final List<bool> _selectedPartes = <bool>[true, false, false];
-  String seleccion = "Mangas";
+  final List<bool> _selectedPartes = <bool>[true, false];
+  String seleccion = "Torso";
   String textoTorso = "";
   String textoEspalda = "";
-  String textoMangas = "";
   TextEditingController myController = TextEditingController();
   double _currentSliderValue = 12;
 
@@ -38,9 +36,6 @@ class _MyHomePageState extends State<TextPage> {
       } else if (seleccion == "Espalda") {
         print("back");
         textoEspalda = s;
-      } else {
-        print("sleeves");
-        textoMangas = s;
       }
 
       myController.text = "";
@@ -49,16 +44,13 @@ class _MyHomePageState extends State<TextPage> {
 
   void moving(String seleccion) {
     setState(() {
-      String s = textoEspalda + textoTorso + textoMangas;
+      String s = textoEspalda + textoTorso;
       textoTorso = "";
       textoEspalda = "";
-      textoMangas = "";
       if (seleccion == "Torso") {
         textoTorso = s;
       } else if (seleccion == "Espalda") {
         textoEspalda = s;
-      } else {
-        textoMangas = s;
       }
     });
   }
@@ -92,7 +84,11 @@ class _MyHomePageState extends State<TextPage> {
                 //"Mangas", "Pecho", "Espalda"
               }
             }
-            moving(seleccion);
+            //widget.datos['texto']['string'] = value;
+            widget.datos['texto']['zona'] = seleccion;
+            widget.datos['texto']['size'] = _currentSliderValue;
+            widget.onDataChange(widget.datos);
+            //moving(seleccion);
           });
         },
         borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -114,8 +110,12 @@ class _MyHomePageState extends State<TextPage> {
           height: 60,
           child: TextField(
             onSubmitted: (value) {
-              print(value);
-              textinho(value, seleccion);
+              //print(value);
+              //textinho(value, seleccion);
+              widget.datos['texto']['string'] = value;
+              widget.datos['texto']['zona'] = seleccion;
+              widget.datos['texto']['size'] = _currentSliderValue;
+              widget.onDataChange(widget.datos);
             },
             controller: myController,
             obscureText: false,
@@ -142,6 +142,9 @@ class _MyHomePageState extends State<TextPage> {
               setState(() {
                 _currentSliderValue = value;
               });
+              widget.datos['texto']['zona'] = seleccion;
+              widget.datos['texto']['size'] = _currentSliderValue;
+              widget.onDataChange(widget.datos);
             }),
       ),
     ]);

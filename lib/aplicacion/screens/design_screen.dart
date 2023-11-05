@@ -171,26 +171,68 @@ class _DesignScreenState extends State<DesignScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: (MediaQuery.of(context).size.width / 2) - 10,
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        widget.datos['color'].withOpacity(0.5),
-                        BlendMode.srcATop),
-                    child: widget.datos['img_front'],
-                  ),
-                ),
+                    width: (MediaQuery.of(context).size.width / 2) - 10,
+                    child: Stack(
+                        fit: StackFit.loose,
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ColorFiltered(
+                            colorFilter: ColorFilter.mode(
+                                widget.datos['color'].withOpacity(0.5),
+                                BlendMode.srcATop),
+                            child: widget.datos['img_front'],
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height * 0.12,
+                            child: Container(
+                              height: 25,
+                              width: 97,
+                              color: Colors.red,
+                              child: DefaultTextStyle.merge(
+                                style: TextStyle(
+                                  fontSize: widget.datos['texto']['size'],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                child: Center(
+                                  child: Text(widget.datos['texto']['string']),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ])),
                 const SizedBox(
                   width: 10,
                 ),
                 SizedBox(
-                  width: (MediaQuery.of(context).size.width / 2) - 10,
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        widget.datos['color'].withOpacity(0.5),
-                        BlendMode.srcATop),
-                    child: widget.datos['img_back'],
-                  ),
-                ),
+                    width: (MediaQuery.of(context).size.width / 2) - 10,
+                    child: Stack(
+                        fit: StackFit.loose,
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ColorFiltered(
+                            colorFilter: ColorFilter.mode(
+                                widget.datos['color'].withOpacity(0.5),
+                                BlendMode.srcATop),
+                            child: widget.datos['img_front'],
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height * 0.12,
+                            child: Container(
+                              height: 25,
+                              width: 97,
+                              color: Colors.red,
+                              child: DefaultTextStyle.merge(
+                                style: TextStyle(
+                                  fontSize: widget.datos['texto']['size'],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                child: Center(
+                                  child: Text(widget.datos['texto']['string']),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ])),
               ],
             ),
           ),
