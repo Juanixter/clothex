@@ -75,7 +75,7 @@ class _MyHomePageState extends State<TextPage> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
         child: Text(
-          'Testing',
+          'TEEEEST',
           style: const TextStyle()
               .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
         ),
