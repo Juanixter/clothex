@@ -190,11 +190,14 @@ class _DesignScreenState extends State<DesignScreen> {
                               color: Colors.red,
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
-                                  fontSize: widget.datos['texto']['size'],
+                                  fontSize: 18,
+                                  //fontSize: widget.datos['texto']['size'],
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(
-                                  child: Text(widget.datos['texto']['string']),
+                                  child: Text("hola"
+                                      //widget.datos['texto']['string']
+                                      ),
                                 ),
                               ),
                             ),
@@ -223,12 +226,14 @@ class _DesignScreenState extends State<DesignScreen> {
                               color: Colors.red,
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
-                                  fontSize: widget.datos['texto']['size'],
+                                  fontSize: 18,
+                                  //fontSize: widget.datos['texto']['size'],
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(
-                                  child: Text(widget.datos['texto']['string']),
-                                ),
+                                    child: Text("eX"
+                                        //widget.datos['texto']['string']),
+                                        )),
                               ),
                             ),
                           ),
