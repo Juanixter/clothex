@@ -7,14 +7,14 @@ const List<Widget> partes = <Widget>[
   Text('Espalda'),
 ];
 
-String prenda = "Franela";
+//String prenda = "Franela";
 
 // ignore: must_be_immutable
 class TextPage extends StatefulWidget {
+  final Map<String, dynamic> datos;
   final Function onDataChange;
-  Object? datos;
 
-  TextPage({super.key, required this.datos, required this.onDataChange});
+  const TextPage({super.key, required this.datos, required this.onDataChange});
 
   @override
   State<TextPage> createState() => _MyHomePageState();
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<TextPage> {
   }
 
   Widget _buildText() {
-    final mapa = widget.datos as Map<String, String>;
+    final mapa = widget.datos;
     String? imgRoute = mapa['imagen'];
 
     return Center(
