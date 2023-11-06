@@ -67,7 +67,7 @@ class _MyHomePageState extends State<TextPage> {
       Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
         child: Text(
-          'TEEEEST',
+          'Agregar Texto',
           style: const TextStyle()
               .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
@@ -116,6 +116,7 @@ class _MyHomePageState extends State<TextPage> {
               widget.datos['texto']['zona'] = seleccion;
               widget.datos['texto']['size'] = _currentSliderValue;
               widget.onDataChange(widget.datos);
+              myController.text = "";
             },
             controller: myController,
             obscureText: false,
@@ -134,9 +135,9 @@ class _MyHomePageState extends State<TextPage> {
             value: _currentSliderValue,
             inactiveColor: Colors.grey,
             activeColor: Colors.green,
-            min: 12,
-            max: 22,
-            divisions: 10,
+            min: 10,
+            max: 25,
+            divisions: 15,
             label: _currentSliderValue.round().toString(),
             onChanged: (double value) {
               setState(() {

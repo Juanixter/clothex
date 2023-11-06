@@ -28,6 +28,14 @@ class _DesignScreenState extends State<DesignScreen> {
     super.dispose();
   }
 
+  String textZone(String to) {
+    if (widget.datos['texto']['zona'] == to) {
+      return widget.datos['texto']['string'];
+    } else {
+      return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget layoutType;
@@ -185,19 +193,17 @@ class _DesignScreenState extends State<DesignScreen> {
                           Positioned(
                             top: MediaQuery.of(context).size.height * 0.12,
                             child: Container(
-                              height: 25,
-                              width: 97,
-                              color: Colors.red,
+                              height: 40,
+                              width: 120,
+                              //color: Colors.red,
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  //fontSize: widget.datos['texto']['size'],
+                                  //fontSize: 18,
+                                  fontSize: widget.datos['texto']['size'],
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(
-                                  child: Text("hola"
-                                      //widget.datos['texto']['string']
-                                      ),
+                                  child: Text(textZone("Torso")),
                                 ),
                               ),
                             ),
@@ -221,19 +227,16 @@ class _DesignScreenState extends State<DesignScreen> {
                           Positioned(
                             top: MediaQuery.of(context).size.height * 0.12,
                             child: Container(
-                              height: 25,
-                              width: 97,
-                              color: Colors.red,
+                              height: 40,
+                              width: 150,
+                              //color: Colors.red,
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  //fontSize: widget.datos['texto']['size'],
+                                  //fontSize: 18,
+                                  fontSize: widget.datos['texto']['size'],
                                   fontWeight: FontWeight.bold,
                                 ),
-                                child: Center(
-                                    child: Text("eX"
-                                        //widget.datos['texto']['string']),
-                                        )),
+                                child: Center(child: Text(textZone("Espalda"))),
                               ),
                             ),
                           ),

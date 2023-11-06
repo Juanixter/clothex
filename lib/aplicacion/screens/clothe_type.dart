@@ -14,6 +14,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
     "tipo": '',
     "img_front": null,
     "img_back": null,
+    "texto": {"string": "", "size": 0, "zona": ""}
   };
 
   void changeType(int collectionIndex) {
