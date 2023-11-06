@@ -52,13 +52,13 @@ class _MyPageState extends State<SelectPatternScreen> {
   Widget buildImage() => Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-          child: CustomPaint(
-            painter: MyPainter(pattern),
-            child: Image.asset(
-              "assets/Images/product6.png",
-              fit: BoxFit.contain,
-            ),
+        child: CustomPaint(
+          painter: MyPainter(pattern),
+          child: Image.asset(
+            "assets/Images/product6.png",
+            fit: BoxFit.contain,
           ),
+        ),
       );
 
   Widget buildColorIcons() => Positioned(
@@ -95,8 +95,8 @@ class _MyPageState extends State<SelectPatternScreen> {
                   primaryColor = myColor;
 
                   if (primaryColor == Colors.red) {
-                    pattern =
-                        Dots(bgColor: Colors.transparent, fgColor: primaryColor);
+                    pattern = Dots(
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.blue) {
                     pattern = VerticalStripesLight(
                         bgColor: Colors.transparent, fgColor: primaryColor);
@@ -110,11 +110,11 @@ class _MyPageState extends State<SelectPatternScreen> {
                     pattern = VerticalStripesLight(
                         bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.yellow) {
-                    pattern =
-                        Dots(bgColor: Colors.transparent, fgColor: primaryColor);
+                    pattern = Dots(
+                        bgColor: Colors.transparent, fgColor: primaryColor);
                   } else if (primaryColor == Colors.black) {
-                    pattern =
-                        Dots(bgColor: Colors.transparent, fgColor: Colors.white);
+                    pattern = Dots(
+                        bgColor: Colors.transparent, fgColor: Colors.white);
                   }
                 });
               },
@@ -198,13 +198,11 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
-    // Set the blend mode for the Paint object
-    Paint paint = Paint()..blendMode = BlendMode.color;
-
-    // Paint the pattern on the canvas
-    pattern.paintOnRect(canvas, size, rect);;
+    // Usar srcOver para pintar sobre la imagen
+    Paint paint = Paint()..blendMode = BlendMode.srcOver;
+    // Pintar el patrón en el canvas
+    pattern.paintOnRect(canvas, size, rect);
   }
-
   @override
   bool shouldRepaint(MyPainter oldDelegate) => oldDelegate.pattern != pattern;
 }
