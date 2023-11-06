@@ -13,7 +13,7 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
   int currentIndex = 0;
 
   void onTabPressed(index) {
-    if (index == 2) {
+    if (index == 1) {
       Navigator.of(context).pushNamed('/select_clothe_type');
       return;
     }
@@ -38,13 +38,9 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
         BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
+              size: 40,
             ),
             label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_box,
-            ),
-            label: 'Profile'),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.add_circle_outline_sharp,
@@ -55,13 +51,9 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
         BottomNavigationBarItem(
             icon: Icon(
               Icons.design_services,
+              size: 40,
             ),
             label: 'My Designs'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-            ),
-            label: 'Chat'),
       ],
     );
   }

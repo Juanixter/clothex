@@ -11,10 +11,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    const MaterialApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Clothex App',
       themeMode: ThemeMode.system,
-      initialRoute: '/select_pattern_screen',
+      theme: ThemeData().copyWith(
+        useMaterial3: true,
+      ),
+      initialRoute: '/home_screen',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );

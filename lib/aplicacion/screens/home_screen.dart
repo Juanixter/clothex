@@ -1,5 +1,6 @@
 import 'package:clothex_app/aplicacion/Widgets/clothex_bottom_bar.dart';
-import 'package:clothex_app/aplicacion/screens/in_progress_screen.dart';
+import 'package:clothex_app/aplicacion/widgets/home_info.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,50 +8,44 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Clothex App',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
+    final double width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            style: IconButton.styleFrom(
+              iconSize: 40,
+              foregroundColor: Colors.grey,
             ),
+            onPressed: () {},
+            icon: const Icon(Icons.person),
           ),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-          bottom: TabBar(
-            unselectedLabelColor: Colors.black,
-            labelColor: Colors.green[800],
-            indicatorColor: Colors.green[800],
-            isScrollable: true,
-            tabs: const [
-              Tab(text: 'Inspírate'),
-              Tab(text: 'Diseños de expertos'),
-              Tab(text: 'Siguiendo'),
-            ],
-          ),
-        ),
-        body: const InProgress(),
-        bottomNavigationBar: const ClothexBottomBar(),
+        ],
       ),
+      body: Container(
+          decoration: BoxDecoration(
+            gradient: width < 600
+                ? const RadialGradient(
+                    tileMode: TileMode.clamp,
+                    radius: 1.25,
+                    colors: [
+                      Colors.black,
+                      Color.fromARGB(255, 68, 152, 81),
+                      Color.fromARGB(255, 1, 66, 11),
+                    ],
+                  )
+                : const LinearGradient(
+                    colors: [
+                      Colors.black,
+                      Color.fromARGB(255, 68, 152, 81),
+                      Color.fromARGB(255, 1, 66, 11),
+                    ],
+                  ),
+          ),
+          child: const HomeInfo()),
+      bottomNavigationBar: const ClothexBottomBar(),
     );
   }
 }
