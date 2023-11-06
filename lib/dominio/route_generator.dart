@@ -1,6 +1,7 @@
 import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
+import 'package:clothex_app/aplicacion/screens/myDesings_screen.dart';
 import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
 import 'package:clothex_app/aplicacion/screens/select_pattern_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class RouteGenerator {
       // case '/text_page':
       //   return MaterialPageRoute(builder: (context) => TextPage(datos: args));
 
-      case '/select_pattern_screen':
-        return MaterialPageRoute(builder: (context) => SelectPatternScreen());
+      case '/my_designs_screen':
+        return MaterialPageRoute(builder: (context) => MyDesignsScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
