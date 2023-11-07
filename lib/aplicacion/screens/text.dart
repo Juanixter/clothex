@@ -2,8 +2,8 @@ import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:flutter/material.dart';
 
 const List<Widget> partes = <Widget>[
-  Text('Torso'),
-  Text('Espalda'),
+  Text('Frente'),
+  Text('Posterior'),
 ];
 
 //String prenda = "Franela";
@@ -65,11 +65,11 @@ class _MyHomePageState extends State<TextPage> {
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
         child: Text(
           'Agregar Texto',
           style: const TextStyle()
-              .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+              .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
       ToggleButtons(
@@ -147,6 +147,17 @@ class _MyHomePageState extends State<TextPage> {
               widget.datos['texto']['size'] = _currentSliderValue;
               widget.onDataChange(widget.datos);
             }),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 30),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+          ),
+          onPressed: () {},
+          child: const Text('¡Termina tu diseño!'),
+        ),
       ),
     ]);
   }

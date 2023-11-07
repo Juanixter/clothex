@@ -44,19 +44,33 @@ class _MaterialScreenState extends State<MaterialScreen> {
 
   void onSelection() {
     int materialIndex = _selectedMaterials.indexOf(true);
-    int sizeIndex = _toggleButtonsSelection.indexOf(true);
+    int tallaIndex = _toggleButtonsSelection.indexOf(true);
 
     String material = materials[materialIndex].toString();
-    String talla = shirtSizeOptions[sizeIndex].$2;
+    String talla = shirtSizeOptions[tallaIndex].$2;
 
-    widget.datos['material'] = material;
-    widget.datos['talla'] = talla;
+    widget.datos['material'] = {
+      "nombre": material,
+      "indice": materialIndex,
+    };
+    widget.datos['talla'] = {
+      "nombre": talla,
+      "indice": tallaIndex,
+    };
 
     widget.onDataChange(widget.datos);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.datos['material'] != null) {
+      _selectedMaterials[_selectedMaterials.indexOf(true)] = false;
+      _selectedMaterials[widget.datos['material']['indice']] = true;
+    }
+    if (widget.datos['talla'] != null) {
+      _toggleButtonsSelection[_toggleButtonsSelection.indexOf(true)] = false;
+      _toggleButtonsSelection[widget.datos['talla']['indice']] = true;
+    }
     return Column(
       children: [
         Padding(
@@ -81,7 +95,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 selectedBorderColor: Colors.grey,
                 selectedColor: Colors.white,
-                fillColor: Colors.blue[200],
+                fillColor: Colors.green,
                 color: Colors.black,
                 constraints: const BoxConstraints(
                   minHeight: 40.0,
@@ -95,7 +109,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
           child: Padding(
               padding: const EdgeInsets.all(8),
               child: ToggleButtons(
-                fillColor: Colors.blue[200],
+                fillColor: Colors.green,
                 selectedColor: Colors.white,
                 isSelected: _toggleButtonsSelection,
                 onPressed: (int index) {

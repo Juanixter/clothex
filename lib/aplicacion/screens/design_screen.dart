@@ -38,6 +38,7 @@ class _DesignScreenState extends State<DesignScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double fontSize = widget.datos['texto']['size'].toDouble();
     Widget layoutType;
     if (kIsWeb) {
       layoutType = Column(
@@ -67,6 +68,10 @@ class _DesignScreenState extends State<DesignScreen> {
                       .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
+                    style: IconButton.styleFrom(
+                      foregroundColor:
+                          currentIndex == 2 ? Colors.white : Colors.black,
+                    ),
                     onPressed: () {
                       if (currentIndex != 2) {
                         _pageController.animateToPage(currentIndex + 1,
@@ -124,6 +129,10 @@ class _DesignScreenState extends State<DesignScreen> {
                       .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
+                    style: IconButton.styleFrom(
+                      foregroundColor:
+                          currentIndex == 2 ? Colors.white : Colors.black,
+                    ),
                     onPressed: () {
                       if (currentIndex != 2) {
                         _pageController.animateToPage(currentIndex + 1,
@@ -199,7 +208,7 @@ class _DesignScreenState extends State<DesignScreen> {
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
                                   //fontSize: 18,
-                                  fontSize: widget.datos['texto']['size'],
+                                  fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(
@@ -233,7 +242,7 @@ class _DesignScreenState extends State<DesignScreen> {
                               child: DefaultTextStyle.merge(
                                 style: TextStyle(
                                   //fontSize: 18,
-                                  fontSize: widget.datos['texto']['size'],
+                                  fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(child: Text(textZone("Espalda"))),
