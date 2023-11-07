@@ -1,9 +1,16 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
+import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:confetti/confetti.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CheckoutScreen extends StatefulWidget {
+  CheckoutScreen({super.key, this.datos});
+
+  Map<String, dynamic>? datos;
+
   @override
   State<StatefulWidget> createState() {
     return _CheckoutScreen();
@@ -23,12 +30,17 @@ class _CheckoutScreen extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    widget.datos?['img_front'] = null;
+    widget.datos?['img_back'] = null;
+    widget.datos?['color'] = widget.datos?['color'].toString();
+    print(widget.datos);
     return Scaffold(
       body: Center(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -44,7 +56,9 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: buildButtonToLogin(),
+                  child: FirebaseAuth.instance.currentUser != null
+                      ? null
+                      : buildButtonToLogin(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -115,6 +129,10 @@ class _CheckoutScreen extends State<CheckoutScreen> {
         padding: const EdgeInsets.all(1.0),
         child: ElevatedButton(
             onPressed: () {
+              final id = FirebaseAuth.instance.currentUser?.uid;
+              if (widget.datos != null && id != null) {
+                addDesign(widget.datos!, id);
+              }
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HomeScreen()));
             },

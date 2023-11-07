@@ -3,8 +3,6 @@ import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
 import 'package:clothex_app/aplicacion/screens/my_designs_screen.dart';
-import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
-import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +13,6 @@ class RouteGenerator {
     switch (settings.name) {
       case '/home_screen':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
-
       case '/select_clothe_type':
         return MaterialPageRoute(
             builder: (context) => const ClotheTypeScreen());
@@ -23,28 +20,18 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) =>
                 DesignScreen(datos: args as Map<String, dynamic>));
-      // case '/select_material_screen':
-      //   return MaterialPageRoute(
-      //       builder: (context) => MaterialScreen(datos: args));
-      // case '/select_color':
-      //   return MaterialPageRoute(
-      //       builder: (context) => SelectColorScreen(datos: args));
-      // case '/text_page':
-      //   return MaterialPageRoute(builder: (context) => TextPage(datos: args));
-            builder: (context) => MaterialScreen(datos: args));
-      case '/select_color':
-        return MaterialPageRoute(
-            builder: (context) => SelectColorScreen(
-                  datos: args,
-                ));
       case '/checkout_screen':
-        return MaterialPageRoute(builder: (context) => CheckoutScreen());
-
+        return MaterialPageRoute(
+            builder: (context) => CheckoutScreen(
+                  datos: args as Map<String, dynamic>,
+                ));
       case '/mydesigns_screen':
         return MaterialPageRoute(builder: (context) => const MyDesignsScreen());
-
       case '/signin_screen':
-        return MaterialPageRoute(builder: (context) => const SignInScreen());
+        return MaterialPageRoute(
+            builder: (context) => SignInScreen(
+                  datos: args as Map<String, dynamic>,
+                ));
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());

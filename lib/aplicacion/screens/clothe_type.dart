@@ -118,6 +118,10 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                       snapshot.data?[index]['img_back'],
                                       fit: BoxFit.contain,
                                     );
+                                    datos['urlFront'] =
+                                        snapshot.data?[index]['img_front'];
+                                    datos['urlBack'] =
+                                        snapshot.data?[index]['img_back'];
                                     datos['tipo'] =
                                         snapshot.data?[index]['nombre'];
                                     datos['img_front'] = front;

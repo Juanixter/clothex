@@ -1,11 +1,15 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/signup_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
+import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  SignInScreen({super.key, this.datos});
+
+  Map<String, dynamic>? datos;
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -43,6 +47,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   email: _emailTextController.text,
                   password: _passwordTextController.text)
               .then((value) {
+            final id = value.user!.uid;
+            if (widget.datos != null) {
+              addDesign(widget.datos!, id);
+            }
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }).onError((error, stackTrace) {
@@ -62,8 +70,12 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(color: Colors.black)),
         GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignUpScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SignUpScreen(
+                          datos: widget.datos,
+                        )));
           },
           child: const Text(
             " Sign Up",

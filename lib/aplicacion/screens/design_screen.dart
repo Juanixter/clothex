@@ -40,7 +40,9 @@ class _DesignScreenState extends State<DesignScreen> {
   Widget build(BuildContext context) {
     final double fontSize = widget.datos['texto']['size'].toDouble();
     Widget layoutType;
+    double heightRatio;
     if (kIsWeb) {
+      heightRatio = 0.12;
       layoutType = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -103,6 +105,7 @@ class _DesignScreenState extends State<DesignScreen> {
         ],
       );
     } else {
+      heightRatio = 0.05;
       layoutType = Stack(
         children: [
           Padding(
@@ -200,7 +203,8 @@ class _DesignScreenState extends State<DesignScreen> {
                             child: widget.datos['img_front'],
                           ),
                           Positioned(
-                            top: MediaQuery.of(context).size.height * 0.12,
+                            top: MediaQuery.of(context).size.height *
+                                heightRatio,
                             child: Container(
                               height: 40,
                               width: 120,
@@ -212,7 +216,7 @@ class _DesignScreenState extends State<DesignScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 child: Center(
-                                  child: Text(textZone("Torso")),
+                                  child: Text(textZone("Frente")),
                                 ),
                               ),
                             ),
@@ -231,10 +235,11 @@ class _DesignScreenState extends State<DesignScreen> {
                             colorFilter: ColorFilter.mode(
                                 widget.datos['color'].withOpacity(0.5),
                                 BlendMode.srcATop),
-                            child: widget.datos['img_front'],
+                            child: widget.datos['img_back'],
                           ),
                           Positioned(
-                            top: MediaQuery.of(context).size.height * 0.12,
+                            top: MediaQuery.of(context).size.height *
+                                heightRatio,
                             child: Container(
                               height: 40,
                               width: 150,
@@ -245,7 +250,8 @@ class _DesignScreenState extends State<DesignScreen> {
                                   fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                child: Center(child: Text(textZone("Espalda"))),
+                                child:
+                                    Center(child: Text(textZone("Posterior"))),
                               ),
                             ),
                           ),

@@ -1,10 +1,14 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
+import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  SignUpScreen({super.key, this.datos});
+
+  Map<String, dynamic>? datos;
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -48,7 +52,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   email: _emailTextController.text,
                   password: _passwordTextController.text)
               .then((value) {
-            print("Created New Account");
+            final id = value.user!.uid;
+            if (widget.datos != null) {
+              addDesign(widget.datos!, id);
+            }
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }).onError((error, stackTrace) {
