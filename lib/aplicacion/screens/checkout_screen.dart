@@ -32,8 +32,11 @@ class _CheckoutScreen extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     widget.datos?['img_front'] = null;
     widget.datos?['img_back'] = null;
-    widget.datos?['color'] = widget.datos?['color'].toString();
-    print(widget.datos);
+
+    Color currentClotheColor = widget.datos?['color'] as Color;
+    int colorValue = currentClotheColor.value;
+    widget.datos?['color'] = colorValue;
+
     return Scaffold(
       body: Center(
         child: Center(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -36,4 +37,20 @@ Future<List> getClotheSubtypes(int docIndex) async {
 
 Future<void> addDesign(Map<String, dynamic> datos, String id) async {
   await db.collection('Usuarios').doc(id).collection('diseños').add(datos);
+}
+
+Future<List> getDesigns() async {
+  List designs = [];
+  CollectionReference crUsers = db.collection('Usuarios');
+
+  CollectionReference subCollectionRef =
+      crUsers.doc(FirebaseAuth.instance.currentUser!.uid).collection('diseños');
+
+  QuerySnapshot queryDesigns = await subCollectionRef.get();
+
+  for (var element in queryDesigns.docs) {
+    designs.add(element.data());
+  }
+
+  return designs;
 }
