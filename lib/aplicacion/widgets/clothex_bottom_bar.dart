@@ -16,6 +16,9 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
     if (index == 1) {
       Navigator.of(context).pushNamed('/select_clothe_type');
       return;
+    } else if (index == 2) {
+      Navigator.of(context).pushNamed('/my_designs_screen');
+      return;
     }
 
     setState(() {

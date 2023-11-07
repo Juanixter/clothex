@@ -2,8 +2,10 @@ import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
-import 'package:clothex_app/aplicacion/screens/my_designs_screen.dart';
+
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
+
+import 'package:clothex_app/aplicacion/screens/myDesings_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -25,13 +27,13 @@ class RouteGenerator {
             builder: (context) => CheckoutScreen(
                   datos: args as Map<String, dynamic>,
                 ));
-      case '/mydesigns_screen':
-        return MaterialPageRoute(builder: (context) => const MyDesignsScreen());
       case '/signin_screen':
         return MaterialPageRoute(
             builder: (context) => SignInScreen(
                   datos: args as Map<String, dynamic>,
                 ));
+      case '/my_designs_screen':
+        return MaterialPageRoute(builder: (context) => MyDesignsScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
