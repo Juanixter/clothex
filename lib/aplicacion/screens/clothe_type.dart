@@ -127,6 +127,14 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                     datos['img_front'] = front;
                                     datos['img_back'] = back;
                                     datos['color'] = Colors.white;
+                                    datos['material'] = {
+                                      "nombre": "Text('Algodón')",
+                                      "indice": 0,
+                                    };
+                                    datos['talla'] = {
+                                      "nombre": "XS",
+                                      "indice": 0,
+                                    };
                                     Navigator.of(context).pushNamed(
                                         '/design_screen',
                                         arguments: datos);

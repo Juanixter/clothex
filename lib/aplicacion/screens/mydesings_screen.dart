@@ -103,12 +103,14 @@ class DesignCard extends StatelessWidget {
           ListTile(
             title: Text('Talla: ${design.talla}'),
           ),
-          ListTile(
-            title: Text('Zona de texto: ${design.zona}'),
-          ),
-          ListTile(
-            title: Text('Texto: ${design.zona}'),
-          ),
+          if (design.zona != "")
+            ListTile(
+              title: Text('Zona de texto: ${design.zona}'),
+            ),
+          if (design.texto != "")
+            ListTile(
+              title: Text('Texto: ${design.texto}'),
+            ),
         ],
       ),
     );

@@ -36,7 +36,7 @@ Future<List> getClotheSubtypes(int docIndex) async {
 }
 
 Future<void> addDesign(Map<String, dynamic> datos, String id) async {
-  await db.collection('Usuarios').doc(id).collection('diseños').add(datos);
+  db.collection('Usuarios').doc(id).collection('diseños').add(datos);
 }
 
 Future<List> getDesigns() async {
