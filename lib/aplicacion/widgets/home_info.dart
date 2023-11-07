@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeInfo extends StatelessWidget {
@@ -6,7 +7,30 @@ class HomeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    if (width < 600) {
+    if (kIsWeb) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/Images/logo.png',
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(200, 0, 200, 0),
+              child: Text(
+                'Una app con la que podras diseñar tus propias prendas de ropa personalizadas, con Clothex los limites son tu imaginación. ¡Anímate y diseña la prenda que siempre has deseado tener!',
+                textAlign: TextAlign.center,
+                style: const TextStyle().copyWith(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ))
+        ],
+      );
+    } else if (width < 600) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
