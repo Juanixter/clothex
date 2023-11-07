@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:clothex_app/dominio/prendas.dart';
 import 'package:flutter/material.dart';
 
 class SelectColorScreen extends StatefulWidget {
@@ -90,6 +91,21 @@ class _MyPageState extends State<SelectColorScreen> {
             ],
           ),
         ),
+        if (!tiposDePrenda.contains(widget.datos['tipo']))
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed('/checkout_screen', arguments: widget.datos);
+              },
+              child: const Text('¡Termina tu diseño!'),
+            ),
+          ),
       ],
     );
   }

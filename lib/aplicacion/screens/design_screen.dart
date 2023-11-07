@@ -1,6 +1,7 @@
 import 'package:clothex_app/aplicacion/screens/select_color_screen.dart';
 import 'package:clothex_app/aplicacion/screens/select_material_screen.dart';
 import 'package:clothex_app/aplicacion/screens/text.dart';
+import 'package:clothex_app/dominio/prendas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
@@ -98,7 +99,8 @@ class _DesignScreenState extends State<DesignScreen> {
                     datos: widget.datos, onDataChange: onDataChanged),
                 SelectColorScreen(
                     datos: widget.datos, onDataChange: onDataChanged),
-                TextPage(datos: widget.datos, onDataChange: onDataChanged)
+                if (tiposDePrenda.contains(widget.datos['tipo']))
+                  TextPage(datos: widget.datos, onDataChange: onDataChanged)
               ],
             ),
           ),
@@ -158,7 +160,8 @@ class _DesignScreenState extends State<DesignScreen> {
               MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
               SelectColorScreen(
                   datos: widget.datos, onDataChange: onDataChanged),
-              TextPage(datos: widget.datos, onDataChange: onDataChanged)
+              if (tiposDePrenda.contains(widget.datos['tipo']))
+                TextPage(datos: widget.datos, onDataChange: onDataChanged)
             ],
           ),
         ],
