@@ -71,7 +71,8 @@ flutter:
    - assets/Images/checkmark.png
    - assets/Images/clothex_logo.jpg
    - assets/Images/logo.png
-  
+   - assets/Images/empty_cart.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
