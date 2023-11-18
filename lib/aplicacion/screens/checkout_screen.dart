@@ -116,15 +116,15 @@ class _CheckoutScreen extends State<CheckoutScreen> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SignInScreen()));
             },
-            child: Text('Go to Login',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                )),
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.withOpacity(0.3),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
+                )),
+            child: const Text('Go to Login',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ))),
       );
 
@@ -139,15 +139,15 @@ class _CheckoutScreen extends State<CheckoutScreen> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HomeScreen()));
             },
-            child: Text('Exit',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                )),
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
+                )),
+            child: const Text('Exit',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ))),
       );
 }

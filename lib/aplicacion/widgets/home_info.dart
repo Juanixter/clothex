@@ -6,7 +6,6 @@ class HomeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     if (kIsWeb) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +29,7 @@ class HomeInfo extends StatelessWidget {
               ))
         ],
       );
-    } else if (width < 600) {
+    } else {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -50,33 +49,6 @@ class HomeInfo extends StatelessWidget {
             ),
           ),
         ],
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/Images/logo.png',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: Text(
-                'Una app con la que podras diseñar tus propias prendas de ropa personalizadas, con Clothex los limites son tu imaginación. ¡Anímate y diseña la prenda que siempre has deseado tener!',
-                softWrap: true,
-                textAlign: TextAlign.center,
-                style: const TextStyle().copyWith(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
       );
     }
   }
