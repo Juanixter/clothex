@@ -109,6 +109,12 @@ class _MyHomePageState extends State<TextPage> {
             width: 250,
             height: 60,
             child: TextField(
+              onChanged: (value) {
+                widget.datos['texto']['string'] = value;
+                widget.datos['texto']['zona'] = seleccion;
+                widget.datos['texto']['size'] = _currentSliderValue;
+                widget.onDataChange(widget.datos);
+              },
               onSubmitted: (value) {
                 //print(value);
                 //textinho(value, seleccion);
