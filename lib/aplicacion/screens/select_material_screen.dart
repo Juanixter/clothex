@@ -24,13 +24,6 @@ const List<(ShirtSize, String)> shirtSizeOptions = <(ShirtSize, String)>[
   (ShirtSize.extraLarge, 'XL'),
 ];
 
-const List<Widget> materials = <Widget>[
-  Text('Algodón'),
-  Text('Dri-Fit'),
-  Text('Lino'),
-  Text('Poliéster'),
-];
-
 @override
 class _MaterialScreenState extends State<MaterialScreen> {
   final List<bool> _toggleButtonsSelection = <bool>[
@@ -40,18 +33,43 @@ class _MaterialScreenState extends State<MaterialScreen> {
     false,
     false
   ];
-  final List<bool> _selectedMaterials = <bool>[true, false, false, false];
+
+  int currentMaterialIndex = 0;
+
+  List<bool> getSelectedMaterials(int selectedIndex) {
+    List<bool> lista = [];
+
+    for (int i = 0; i < widget.datos['materiales_posibles'].length; i++) {
+      if (i == selectedIndex) {
+        lista.add(true);
+      } else {
+        lista.add(false);
+      }
+    }
+
+    return lista;
+  }
+
+  List<Widget> materialsList() {
+    List<Widget> lista = [];
+
+    for (var material in widget.datos['materiales_posibles']) {
+      lista.add(Text(material));
+    }
+
+    return lista;
+  }
 
   void onSelection() {
-    int materialIndex = _selectedMaterials.indexOf(true);
     int tallaIndex = _toggleButtonsSelection.indexOf(true);
 
-    String material = materials[materialIndex].toString();
+    final List<Widget> materials = materialsList();
+    String material = materials[currentMaterialIndex].toString();
     String talla = shirtSizeOptions[tallaIndex].$2;
 
     widget.datos['material'] = {
       "nombre": material,
-      "indice": materialIndex,
+      "indice": currentMaterialIndex,
     };
     widget.datos['talla'] = {
       "nombre": talla,
@@ -63,14 +81,17 @@ class _MaterialScreenState extends State<MaterialScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.datos['material'] != null) {
-      _selectedMaterials[_selectedMaterials.indexOf(true)] = false;
-      _selectedMaterials[widget.datos['material']['indice']] = true;
-    }
+    currentMaterialIndex = widget.datos['material']['indice'];
     if (widget.datos['talla'] != null) {
       _toggleButtonsSelection[_toggleButtonsSelection.indexOf(true)] = false;
       _toggleButtonsSelection[widget.datos['talla']['indice']] = true;
     }
+
+    final List<bool> selectedMaterials =
+        getSelectedMaterials(currentMaterialIndex);
+
+    final List<Widget> materials = materialsList();
+
     return Column(
       children: [
         Padding(
@@ -86,10 +107,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
               padding: const EdgeInsets.only(bottom: 8),
               child: ToggleButtons(
                 onPressed: (int index) {
-                  // The button that is tapped is set to true, and the others to false.
-                  for (int i = 0; i < _selectedMaterials.length; i++) {
-                    _selectedMaterials[i] = i == index;
-                  }
+                  currentMaterialIndex = index;
                   onSelection();
                 },
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -101,7 +119,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   minHeight: 40.0,
                   minWidth: 80.0,
                 ),
-                isSelected: _selectedMaterials,
+                isSelected: selectedMaterials,
                 children: materials,
               )),
         ),

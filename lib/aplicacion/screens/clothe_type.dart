@@ -40,6 +40,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
             List<String> indexList = [];
 
             if (snapshot.hasData) {
+              datos['materiales_posibles'] = snapshot.data![0]['materiales'];
               return Column(
                 children: [
                   SizedBox(
@@ -70,6 +71,8 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                 ),
                                 onPressed: () {
                                   int index = indexList.indexOf(tipo['nombre']);
+                                  datos['materiales_posibles'] =
+                                      snapshot.data![index]['materiales'];
                                   changeType(index);
                                 },
                                 child: Text(
