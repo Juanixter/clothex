@@ -17,20 +17,23 @@ class DesignerDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Imagen del diseñador
-            Image.network(
-              design.imageUrl,
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+            Hero(
+              tag: design.imageUrl,
+              child: Image.network(
+                design.imageUrl,
+                width: double.infinity,
+                height: 150,
+                fit: BoxFit.contain,
+              ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Título del diseñador
             Text(
               design.title,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Imágenes adicionales con texto
             // Puedes agregar más elementos a esta lista según sea necesario
@@ -75,8 +78,8 @@ class ImageWithText extends StatelessWidget {
         Image.network(
           shirt1,
           width: double.infinity,
-          height: 150,
-          fit: BoxFit.cover,
+          height: 250,
+          fit: BoxFit.contain,
         ),
         SizedBox(height: 10),
         ListTile(
@@ -87,18 +90,19 @@ class ImageWithText extends StatelessWidget {
                 backgroundImage: NetworkImage(designerImageUrl),
               ),
               SizedBox(width: 7.5),
-              Text(frase1),
+              SizedBox(child: Text(frase1, softWrap: true), width: 150, height: 50,),
             ],
+            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
         SizedBox(height: 20),
         Image.network(
           shirt2,
           width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
+          height:250,
+          fit: BoxFit.contain,
         ),
-        SizedBox(height: 100),
+        SizedBox(height: 10),
         ListTile(
           title: Row(
             children: [
@@ -107,8 +111,9 @@ class ImageWithText extends StatelessWidget {
                 backgroundImage: NetworkImage(designerImageUrl),
               ),
               SizedBox(width: 7.5),
-              Text(frase2),
+              SizedBox(child: Text(frase2, softWrap: true), width: 150, height: 50,),
             ],
+            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
         SizedBox(height: 20),

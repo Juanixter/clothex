@@ -81,11 +81,14 @@ class DesignCard extends StatelessWidget {
         padding: const EdgeInsets.all(7.5),
         child: Column(
           children: <Widget>[
-            Image.network(
-              design.imageUrl,
-              height: 150,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            Hero(
+              tag: design.imageUrl,
+              child: Image.network(
+                design.imageUrl,
+                height: 150,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             ListTile(
               title: Row(
