@@ -38,7 +38,7 @@ class RouteGenerator {
           return MaterialPageRoute(builder: (context) => SignInScreen());
         }
       case '/my_designs_screen':
-        return MaterialPageRoute(builder: (context) => MyDesignsScreen());
+        return MaterialPageRoute(builder: (context) => const MyDesignsScreen());
 
       case '/no_designs_screen':
         return MaterialPageRoute(builder: (context) => const NoDesignsScreen());

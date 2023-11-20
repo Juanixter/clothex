@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:clothex_app/dominio/prendas.dart';
 import 'package:flutter/material.dart';
 
@@ -110,7 +108,7 @@ class _MyPageState extends State<SelectColorScreen> {
     );
   }
 
-  Widget buildImage() => Container(
+  Widget buildImage() => SizedBox(
         width: 200,
         height: 200,
         child: ColorFiltered(
@@ -211,6 +209,11 @@ class _MyPageState extends State<SelectColorScreen> {
         padding: const EdgeInsets.all(8),
         child: ElevatedButton(
           onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              )),
           child: const Text(
             'Confirm',
             style: TextStyle(
@@ -218,11 +221,6 @@ class _MyPageState extends State<SelectColorScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              )),
         ),
       ));
 }

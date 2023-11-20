@@ -15,15 +15,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            child: SingleChildScrollView(
-                child: Padding(
+        body: SingleChildScrollView(
+            child: Padding(
       padding: EdgeInsets.fromLTRB(
           20, MediaQuery.of(context).size.height * 0.2, 20, 0),
       child: Column(children: <Widget>[
@@ -56,13 +55,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (widget.datos != null) {
               addDesign(widget.datos!, id);
             }
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
           }).onError((error, stackTrace) {
             print("Error ${error.toString()}");
           });
         })
       ]),
-    ))));
+    )));
   }
 }
