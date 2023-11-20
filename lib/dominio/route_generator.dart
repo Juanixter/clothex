@@ -1,12 +1,15 @@
 import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
+import 'package:clothex_app/aplicacion/screens/designerDetailScreen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
+import 'package:clothex_app/aplicacion/screens/screen_designers.dart';
 
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 
 import 'package:clothex_app/aplicacion/screens/myDesings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:clothex_app/dominio/designers.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,6 +30,8 @@ class RouteGenerator {
             builder: (context) => CheckoutScreen(
                   datos: args as Map<String, dynamic>,
                 ));
+      case '/designer_screen':
+        return MaterialPageRoute(builder: (context) => DesignersScreen());
       case '/signin_screen':
         return MaterialPageRoute(
             builder: (context) => SignInScreen(
@@ -34,7 +39,15 @@ class RouteGenerator {
                 ));
       case '/my_designs_screen':
         return MaterialPageRoute(builder: (context) => MyDesignsScreen());
-
+      case '/designers_detail_screen':
+        if (args != null) {
+          return MaterialPageRoute(
+              builder: (context) => DesignerDetailsScreen(
+                    design: args as Designers,
+                  ));
+        } else {
+          return MaterialPageRoute(builder: (context) => const ErrorScreen());
+        }
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
     }

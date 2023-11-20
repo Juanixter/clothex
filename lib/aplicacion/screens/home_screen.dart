@@ -47,6 +47,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   icon: const Icon(Icons.person),
                 ),
+                IconButton(
+                  style: IconButton.styleFrom(
+                    iconSize: 40,
+                    foregroundColor: Colors.grey,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/designer_screen');
+                  },
+                  icon: const Icon(Icons.gesture_rounded),
+                ),
         ],
       ),
       body: Container(

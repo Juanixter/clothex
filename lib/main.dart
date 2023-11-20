@@ -26,8 +26,8 @@ void main() async {
       theme: ThemeData().copyWith(
         useMaterial3: true,
       ),
-      initialRoute: '/home_screen',
+      initialRoute: '/designer_screen',
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );
-}
+} 
