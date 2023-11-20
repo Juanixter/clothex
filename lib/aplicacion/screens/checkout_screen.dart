@@ -4,6 +4,7 @@ import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:confetti/confetti.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class CheckoutScreen extends StatefulWidget {
@@ -21,6 +22,12 @@ class _CheckoutScreen extends State<CheckoutScreen> {
   bool isPlaying = false;
   final controller = ConfettiController();
 
+  Future<int> designNumber() async {
+    List designs = await getDesigns();
+    int designsLength = designs.length;
+    return designsLength + 1;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,9 +40,20 @@ class _CheckoutScreen extends State<CheckoutScreen> {
     widget.datos?['img_front'] = null;
     widget.datos?['img_back'] = null;
 
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('dd/MM/yyy').format(now);
+    widget.datos?['date'] = formattedDate;
+
     Color currentClotheColor = widget.datos?['color'] as Color;
     int colorValue = currentClotheColor.value;
     widget.datos?['color'] = colorValue;
+
+    designNumber().then(
+      (value) {
+        String titulo = 'Diseño $value';
+        widget.datos?['titulo'] = titulo;
+      },
+    );
 
     return Scaffold(
       body: Center(
@@ -136,8 +154,9 @@ class _CheckoutScreen extends State<CheckoutScreen> {
               if (widget.datos != null && id != null) {
                 addDesign(widget.datos!, id);
               }
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (route) => true);
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,

@@ -208,7 +208,7 @@ class _DesignScreenState extends State<DesignScreen> {
                           Positioned(
                             top: MediaQuery.of(context).size.height *
                                 heightRatio,
-                            child: Container(
+                            child: SizedBox(
                               height: 40,
                               width: 120,
                               //color: Colors.red,
@@ -243,7 +243,7 @@ class _DesignScreenState extends State<DesignScreen> {
                           Positioned(
                             top: MediaQuery.of(context).size.height *
                                 heightRatio,
-                            child: Container(
+                            child: SizedBox(
                               height: 40,
                               width: 150,
                               //color: Colors.red,

@@ -1,4 +1,4 @@
-import 'package:clothex_app/aplicacion/Widgets/clothex_bottom_bar.dart';
+import 'package:clothex_app/aplicacion/widgets/clothex_bottom_bar.dart';
 import 'package:clothex_app/aplicacion/widgets/home_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
           ),
           child: const HomeInfo()),
-      bottomNavigationBar: const ClothexBottomBar(),
+      bottomNavigationBar: const ClothexBottomBar(0),
     );
   }
 }

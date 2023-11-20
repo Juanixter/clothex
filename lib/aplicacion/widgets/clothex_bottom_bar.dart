@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ClothexBottomBar extends StatefulWidget {
-  const ClothexBottomBar({super.key});
+  const ClothexBottomBar(this.index, {super.key});
+
+  final int index;
 
   @override
   State<ClothexBottomBar> createState() {
@@ -10,20 +13,18 @@ class ClothexBottomBar extends StatefulWidget {
 }
 
 class _ClothexBottomBarState extends State<ClothexBottomBar> {
-  int currentIndex = 0;
-
   void onTabPressed(index) {
-    if (index == 1) {
-      Navigator.of(context).pushNamed('/select_clothe_type');
-      return;
-    } else if (index == 2) {
-      Navigator.of(context).pushNamed('/my_designs_screen');
-      return;
+    if (index == 0) {
+      Navigator.of(context).pushReplacementNamed('/home_screen');
+    } else if (index == 1) {
+      Navigator.of(context).pushReplacementNamed('/select_clothe_type');
+    } else {
+      if (FirebaseAuth.instance.currentUser != null) {
+        Navigator.of(context).pushReplacementNamed('/my_designs_screen');
+      } else {
+        Navigator.of(context).pushReplacementNamed('/no_designs_screen');
+      }
     }
-
-    setState(() {
-      currentIndex = index;
-    });
   }
 
   @override
@@ -34,8 +35,8 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
       iconSize: 30,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.green[800],
-      unselectedItemColor: Colors.grey,
-      currentIndex: currentIndex,
+      unselectedItemColor: Colors.black,
+      currentIndex: widget.index,
       onTap: onTabPressed,
       items: const [
         BottomNavigationBarItem(
@@ -48,7 +49,6 @@ class _ClothexBottomBarState extends State<ClothexBottomBar> {
             icon: Icon(
               Icons.add_circle_outline_sharp,
               size: 50,
-              color: Colors.black,
             ),
             label: 'Create Design'),
         BottomNavigationBarItem(

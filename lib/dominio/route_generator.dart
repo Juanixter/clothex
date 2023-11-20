@@ -1,12 +1,12 @@
+import 'package:clothex_app/aplicacion/screens/design_details_screen.dart';
 import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
-
+import 'package:clothex_app/aplicacion/screens/mydesings_screen.dart';
+import 'package:clothex_app/dominio/design.dart';
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 import 'package:clothex_app/aplicacion/screens/no_designs_screen.dart';
-
-import 'package:clothex_app/aplicacion/screens/myDesings_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -29,16 +29,28 @@ class RouteGenerator {
                   datos: args as Map<String, dynamic>,
                 ));
       case '/signin_screen':
-        return MaterialPageRoute(
-            builder: (context) => SignInScreen(
-                  datos: args as Map<String, dynamic>,
-                ));
+        if (args != null) {
+          return MaterialPageRoute(
+              builder: (context) => SignInScreen(
+                    datos: args as Map<String, dynamic>,
+                  ));
+        } else {
+          return MaterialPageRoute(builder: (context) => SignInScreen());
+        }
       case '/my_designs_screen':
         return MaterialPageRoute(builder: (context) => MyDesignsScreen());
 
       case '/no_designs_screen':
-        return MaterialPageRoute(builder: (context) => NoDesignsScreen());
+        return MaterialPageRoute(builder: (context) => const NoDesignsScreen());
 
+      case '/design_details':
+        if (args != null) {
+          return MaterialPageRoute(
+              builder: (context) =>
+                  DesignDetailsScreen(design: args as Design));
+        } else {
+          return MaterialPageRoute(builder: (context) => const ErrorScreen());
+        }
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());
     }

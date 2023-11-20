@@ -40,6 +40,8 @@ dependencies:
   patterns_canvas: ^0.4.0
   confetti:  ^0.6.0
   firebase_auth: ^4.12.1
+  intl: ^0.18.1
+  flutter_paypal_checkout: ^1.0.1
 
   
 
