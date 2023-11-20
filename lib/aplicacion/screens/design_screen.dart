@@ -171,6 +171,11 @@ class _DesignScreenState extends State<DesignScreen> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         elevation: 10,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed('/home_screen');
+            },
+            icon: const Icon(Icons.arrow_back)),
         shadowColor: Colors.black,
         iconTheme: const IconThemeData().copyWith(
           color: Colors.black,

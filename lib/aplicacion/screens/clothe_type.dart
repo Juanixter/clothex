@@ -32,6 +32,11 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
           iconTheme: const IconThemeData().copyWith(
             color: Colors.black,
           ),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/home_screen');
+              },
+              icon: const Icon(Icons.arrow_back)),
         ),
         body: FutureBuilder(
           future: getClotheTypes(),

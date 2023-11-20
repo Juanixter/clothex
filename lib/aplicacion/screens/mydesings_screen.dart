@@ -89,11 +89,11 @@ class DesignCard extends StatelessWidget {
             Expanded(
               child: Stack(
                 children: [
-                  Hero(
-                    tag: design.tag,
-                    child: SizedBox(
-                        width: halfWidth,
-                        height: halfWidth,
+                  SizedBox(
+                      width: halfWidth,
+                      height: halfWidth,
+                      child: Hero(
+                        tag: design.tag,
                         child: ColorFiltered(
                           colorFilter: ColorFilter.mode(
                               designColor.withOpacity(0.6), BlendMode.srcATop),
@@ -101,23 +101,24 @@ class DesignCard extends StatelessWidget {
                             design.urlFront,
                             fit: BoxFit.contain,
                           ),
-                        )),
-                  ),
-                  SizedBox(
-                    width: halfWidth,
-                    height: halfWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 60),
-                      child: Text(
-                        design.texto,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle().copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                  if (design.zona == "Frente")
+                    SizedBox(
+                      width: halfWidth,
+                      height: halfWidth,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 60),
+                        child: Text(
+                          design.texto,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle().copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),

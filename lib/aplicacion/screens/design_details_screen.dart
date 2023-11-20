@@ -73,19 +73,66 @@ class _DesignDetailsScreenState extends State<DesignDetailsScreen> {
                     setState(() {});
                   },
                   children: [
-                    ColorFiltered(
-                      colorFilter: ColorFilter.mode(color, BlendMode.srcATop),
-                      child: Image.network(
-                        widget.design.urlFront,
-                        fit: BoxFit.contain,
-                      ),
+                    Stack(
+                      children: [
+                        Center(
+                          child: Hero(
+                            tag: widget.design.tag,
+                            child: ColorFiltered(
+                              colorFilter:
+                                  ColorFilter.mode(color, BlendMode.srcATop),
+                              child: Image.network(
+                                widget.design.urlFront,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (widget.design.zona == 'Frente')
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 140,
+                              ),
+                              child: Text(
+                                widget.design.texto,
+                                style: const TextStyle().copyWith(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                    ColorFiltered(
-                      colorFilter: ColorFilter.mode(color, BlendMode.srcATop),
-                      child: Image.network(
-                        widget.design.urlBack,
-                        fit: BoxFit.contain,
-                      ),
+                    Stack(
+                      children: [
+                        Center(
+                          child: ColorFiltered(
+                            colorFilter:
+                                ColorFilter.mode(color, BlendMode.srcATop),
+                            child: Image.network(
+                              widget.design.urlBack,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        if (widget.design.zona == 'Posterior')
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 140,
+                              ),
+                              child: Text(
+                                widget.design.texto,
+                                style: const TextStyle().copyWith(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ),
