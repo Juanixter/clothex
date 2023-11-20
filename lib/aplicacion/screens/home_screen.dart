@@ -18,6 +18,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          style: IconButton.styleFrom(
+            iconSize: 40,
+            foregroundColor: Colors.grey,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/designer_screen');
+          },
+          icon: const Icon(Icons.gesture_rounded),
+        ),
         automaticallyImplyLeading: false,
         actions: [
           FirebaseAuth.instance.currentUser != null
