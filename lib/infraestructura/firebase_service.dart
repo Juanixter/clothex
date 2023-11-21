@@ -39,6 +39,30 @@ Future<void> addDesign(Map<String, dynamic> datos, String id) async {
   db.collection('Usuarios').doc(id).collection('diseños').add(datos);
 }
 
+Future<void> addInfo(
+    String id, String? email, String? user, String? password) async {
+  if (email != null && user != null && password != null) {
+    final Map<String, dynamic> info = {
+      "email": email,
+      "username": user,
+      "password": password
+    };
+    db.collection('Usuarios').doc(id).set(info);
+  }
+}
+
+Future<List> getInfo() async {
+  List info = [];
+  CollectionReference crUsers = db.collection('Usuarios');
+
+  DocumentSnapshot queryDesigns =
+      await crUsers.doc(FirebaseAuth.instance.currentUser!.uid).get();
+
+  info.add(queryDesigns);
+
+  return info;
+}
+
 Future<List> getDesigns() async {
   List designs = [];
   CollectionReference crUsers = db.collection('Usuarios');

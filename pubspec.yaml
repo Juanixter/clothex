@@ -74,6 +74,9 @@ flutter:
    - assets/Images/clothex_logo.jpg
    - assets/Images/logo.png
    - assets/Images/empty_cart.png
+   - assets/Images/clothes.png
+   - assets/Images/profile_icon.png
+
 
   #   - images/a_dot_ham.jpeg
 
