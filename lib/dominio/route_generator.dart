@@ -1,13 +1,10 @@
-import 'package:clothex_app/aplicacion/screens/design_details_screen.dart';
 import 'package:clothex_app/aplicacion/screens/design_screen.dart';
 import 'package:clothex_app/aplicacion/screens/checkout_screen.dart';
 import 'package:clothex_app/aplicacion/screens/designerDetailScreen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
 import 'package:clothex_app/aplicacion/screens/mydesings_screen.dart';
-import 'package:clothex_app/dominio/design.dart';
 import 'package:clothex_app/aplicacion/screens/screen_designers.dart';
-import 'package:clothex_app/aplicacion/screens/profile_screen.dart';
 
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 import 'package:clothex_app/aplicacion/screens/no_designs_screen.dart';

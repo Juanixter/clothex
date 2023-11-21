@@ -1,5 +1,4 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
-import 'package:clothex_app/aplicacion/screens/profile_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,9 +15,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   @override
   void dispose() {
     _emailTextController.dispose();

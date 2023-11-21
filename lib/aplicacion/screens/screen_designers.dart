@@ -1,8 +1,9 @@
-import 'package:clothex_app/aplicacion/screens/designerDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:clothex_app/dominio/designers.dart';
 
 class DesignersScreen extends StatelessWidget {
+  DesignersScreen({super.key});
+
   // Datos de diseño simulados
   final List<Designers> dummyDesigns = [
     Designers(
@@ -28,7 +29,8 @@ class DesignersScreen extends StatelessWidget {
         shirt2:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc6d4eV1l2_6CvU2QFy83tCtZunTpOcqzxgw&usqp=CAU',
         frase1: 'Al final, la moda es una forma de expresión personal.',
-        frase2: 'La moda debería ser una forma de escapar, no algo que te aprisione.'),
+        frase2:
+            'La moda debería ser una forma de escapar, no algo que te aprisione.'),
     Designers(
         title: 'Tomoaki Nagao (BAPE)',
         imageUrl:
@@ -40,14 +42,15 @@ class DesignersScreen extends StatelessWidget {
         shirt2:
             'https://ithk-pro-itmall-item.oss-cn-hongkong.aliyuncs.com/2/product/0ZXTEW210080LWHX/0ZXTEW210080LWHX-pdp-1.jpg?x-oss-process=image/resize,m_pad,h_750,w_600/auto-orient,1/quality,Q_80',
         frase1: 'La moda es una oportunidad para expresarse y destacar.',
-        frase2: 'La moda es una forma de decir quién eres sin tener que hablar.'),
+        frase2:
+            'La moda es una forma de decir quién eres sin tener que hablar.'),
   ];
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DISEÑADORES'),
+        title: const Text('DISEÑADORES'),
       ),
       body: ListView.builder(
         itemCount: dummyDesigns.length,
@@ -62,7 +65,7 @@ class DesignersScreen extends StatelessWidget {
 class DesignCard extends StatelessWidget {
   final Designers design;
 
-  DesignCard({required this.design});
+  const DesignCard({super.key, required this.design});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,7 @@ class DesignCard extends StatelessWidget {
                     radius: 26.0,
                     backgroundImage: NetworkImage(design.designerImageUrl),
                   ),
-                  SizedBox(width: 7.5),
+                  const SizedBox(width: 7.5),
                   Text(design.title),
                 ],
               ),

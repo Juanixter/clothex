@@ -28,7 +28,7 @@ class _MyHomePageState extends State<TextPage> {
 
   void textinho(String s, String seleccion) {
     setState(() {
-      print("Seleccion:   " + seleccion);
+      print("Seleccion:   $seleccion");
       if (seleccion == "Torso") {
         print("chest");
         textoTorso = s;

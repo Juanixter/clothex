@@ -1,6 +1,5 @@
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,15 +76,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             setState(() {});
                             Navigator.of(context).pushNamed('/home_screen');
                           },
-                          child: Text('Log Out',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              )),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
+                              )),
+                          child: const Text('Log Out',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ))),
                     ),
                   ],

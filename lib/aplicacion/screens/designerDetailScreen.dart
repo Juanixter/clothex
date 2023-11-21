@@ -4,7 +4,7 @@ import 'package:clothex_app/dominio/designers.dart';
 class DesignerDetailsScreen extends StatelessWidget {
   final Designers design;
 
-  const DesignerDetailsScreen({required this.design});
+  const DesignerDetailsScreen({super.key, required this.design});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class DesignerDetailsScreen extends StatelessWidget {
             // Título del diseñador
             Text(
               design.title,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
 
@@ -62,8 +62,9 @@ class ImageWithText extends StatelessWidget {
   final String frase2;
   final String designerImageUrl;
 
-  ImageWithText(
-      {required this.imageUrl,
+  const ImageWithText(
+      {super.key,
+      required this.imageUrl,
       required this.text,
       required this.frase1,
       required this.frase2,
@@ -81,42 +82,50 @@ class ImageWithText extends StatelessWidget {
           height: 250,
           fit: BoxFit.contain,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ListTile(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 26.0,
                 backgroundImage: NetworkImage(designerImageUrl),
               ),
-              SizedBox(width: 7.5),
-              SizedBox(child: Text(frase1, softWrap: true), width: 150, height: 50,),
+              const SizedBox(width: 7.5),
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: Text(frase1, softWrap: true),
+              ),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Image.network(
           shirt2,
           width: double.infinity,
-          height:250,
+          height: 250,
           fit: BoxFit.contain,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ListTile(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 26.0,
                 backgroundImage: NetworkImage(designerImageUrl),
               ),
-              SizedBox(width: 7.5),
-              SizedBox(child: Text(frase2, softWrap: true), width: 150, height: 50,),
+              const SizedBox(width: 7.5),
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: Text(frase2, softWrap: true),
+              ),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
