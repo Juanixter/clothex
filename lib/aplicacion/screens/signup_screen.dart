@@ -1,4 +1,5 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
+import 'package:clothex_app/aplicacion/screens/profile_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _userNameTextController = TextEditingController();
   @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    _userNameTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -37,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: 20,
         ),
         reusableTextField(
-            "Enter email", Icons.person_outline, false, _emailTextController),
+            "Enter email", Icons.alternate_email, false, _emailTextController),
         const SizedBox(
           height: 20,
         ),
@@ -55,7 +64,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             final id = value.user!.uid;
             if (widget.datos != null) {
               addDesign(widget.datos!, id);
+              addInfo(id, _emailTextController.text,
+                  _userNameTextController.text, _passwordTextController.text);
+            } else {
+              addInfo(id, _emailTextController.text,
+                  _userNameTextController.text, _passwordTextController.text);
             }
+
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }).onError((error, stackTrace) {

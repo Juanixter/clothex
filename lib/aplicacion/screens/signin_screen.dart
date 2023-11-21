@@ -1,4 +1,5 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
+import 'package:clothex_app/aplicacion/screens/profile_screen.dart';
 import 'package:clothex_app/aplicacion/screens/signup_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
@@ -51,8 +52,8 @@ class _SignInScreenState extends State<SignInScreen> {
             if (widget.datos != null) {
               addDesign(widget.datos!, id);
             }
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()));
           }).onError((error, stackTrace) {
             print("Error ${error.toString()}");
           });
