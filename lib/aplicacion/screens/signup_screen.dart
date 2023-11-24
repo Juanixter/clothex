@@ -38,22 +38,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(
           height: 30,
         ),
-        reusableTextField("Enter Username", Icons.person_outline, false,
+        reusableTextField("Ingresa Username", Icons.person_outline, false,
             _userNameTextController),
         const SizedBox(
           height: 20,
         ),
-        reusableTextField(
-            "Enter email", Icons.alternate_email, false, _emailTextController),
+        reusableTextField("Ingresa email", Icons.alternate_email, false,
+            _emailTextController),
         const SizedBox(
           height: 20,
         ),
-        reusableTextField("Enter Password", Icons.lock_outline, true,
+        reusableTextField("Ingresa Contraseña", Icons.lock_outline, true,
             _passwordTextController),
         const SizedBox(
           height: 5,
         ),
-        firebaseUIButton(context, "Sign Up", () {
+        firebaseUIButton(context, "Regístrate", () {
           FirebaseAuth.instance
               .createUserWithEmailAndPassword(
                   email: _emailTextController.text,

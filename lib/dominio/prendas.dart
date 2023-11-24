@@ -1,1 +1,1 @@
-final tiposDePrenda = ["Normal", "Formal", "Polo", "Manga corta", "Hoodie"];
+final tiposDePrenda = ["Franela", "Camisa", "Polo", "Manga corta", "Hoodie"];

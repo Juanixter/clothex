@@ -31,16 +31,16 @@ class _SignInScreenState extends State<SignInScreen> {
           height: 30,
         ),
         reusableTextField(
-            "Enter email", Icons.person_outline, false, _emailTextController),
+            "Ingresa email", Icons.person_outline, false, _emailTextController),
         const SizedBox(
           height: 20,
         ),
-        reusableTextField("Enter Password", Icons.lock_outline, true,
+        reusableTextField("Ingresa Contraseña", Icons.lock_outline, true,
             _passwordTextController),
         const SizedBox(
           height: 5,
         ),
-        firebaseUIButton(context, "Sign In", () {
+        firebaseUIButton(context, "Iniciar Sesión!", () {
           FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: _emailTextController.text,
@@ -65,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don't have account?",
+        const Text("No tienes una cuenta?",
             style: TextStyle(color: Colors.black)),
         GestureDetector(
           onTap: () {
@@ -77,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         )));
           },
           child: const Text(
-            " Sign Up",
+            " Regístrate aquí",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         )

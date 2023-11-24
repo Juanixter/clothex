@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               )),
-                          child: const Text('Log Out',
+                          child: const Text('Terminar Sesión',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

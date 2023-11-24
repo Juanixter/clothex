@@ -31,7 +31,7 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
                       FirebaseAuth.instance.signOut();
                       setState(() {});
                     },
-                    child: const Text('Log Out'),
+                    child: const Text('Terminar sesión'),
                   ),
                 )
               : IconButton(

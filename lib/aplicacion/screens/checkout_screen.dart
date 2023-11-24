@@ -139,7 +139,7 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 )),
-            child: const Text('Go to Login',
+            child: const Text('Iniciar Sesión!',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -163,7 +163,7 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 )),
-            child: const Text('Exit',
+            child: const Text('Salir',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

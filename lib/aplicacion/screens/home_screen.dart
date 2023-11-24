@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       Navigator.of(context).pushNamed('/signin_screen');
                     },
-                    child: const Text('Sign In'),
+                    child: const Text('Iniciar Sesión'),
                   ),
                 )
         ],
