@@ -4,6 +4,7 @@ import 'package:clothex_app/aplicacion/screens/designerDetailScreen.dart';
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/screens/clothe_type.dart';
 import 'package:clothex_app/aplicacion/screens/mydesings_screen.dart';
+import 'package:clothex_app/aplicacion/screens/profile_screen.dart';
 import 'package:clothex_app/aplicacion/screens/screen_designers.dart';
 
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
@@ -54,6 +55,8 @@ class RouteGenerator {
         }
       case '/no_designs_screen':
         return MaterialPageRoute(builder: (context) => const NoDesignsScreen());
+      case '/profile_screen':
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const ErrorScreen());

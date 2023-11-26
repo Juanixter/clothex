@@ -67,11 +67,11 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                   backgroundColor:
                                       indexList.indexOf(tipo['nombre']) ==
                                               currentIndex
-                                          ? Colors.green[200]
+                                          ? Colors.green[700]
                                           : Colors.white,
-                                  side: const BorderSide(width: 1.5),
+                                  side: const BorderSide(width: 2),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(26),
                                   ),
                                 ),
                                 onPressed: () {
