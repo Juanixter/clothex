@@ -143,7 +143,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                       "nombre": "XS",
                                       "indice": 0,
                                     };
-                                    Navigator.of(context).pushNamed(
+                                    Navigator.of(context).pushReplacementNamed(
                                         '/design_screen',
                                         arguments: datos);
                                   },

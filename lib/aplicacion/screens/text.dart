@@ -162,8 +162,8 @@ class _MyHomePageState extends State<TextPage> {
               foregroundColor: Colors.white,
             ),
             onPressed: () {
-              Navigator.of(context)
-                  .pushNamed('/checkout_screen', arguments: widget.datos);
+              Navigator.of(context).pushReplacementNamed('/checkout_screen',
+                  arguments: widget.datos);
             },
             child: const Text('¡Termina tu diseño!'),
           ),

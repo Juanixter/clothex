@@ -1,5 +1,3 @@
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
-import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:confetti/confetti.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -131,8 +129,7 @@ class _CheckoutScreen extends State<CheckoutScreen> {
         padding: const EdgeInsets.all(3.0),
         child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignInScreen()));
+              Navigator.of(context).pushReplacementNamed('/design_details');
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.withOpacity(0.3),
@@ -154,9 +151,7 @@ class _CheckoutScreen extends State<CheckoutScreen> {
               if (widget.datos != null && id != null) {
                 addDesign(widget.datos!, id);
               }
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  (route) => true);
+              Navigator.of(context).pushReplacementNamed('/home_screen');
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
