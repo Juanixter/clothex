@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Container(
+          padding: const EdgeInsets.all(0),
           decoration: BoxDecoration(
             gradient: width < 600
                 ? const RadialGradient(

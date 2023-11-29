@@ -17,10 +17,21 @@ class DesignScreen extends StatefulWidget {
 
 class _DesignScreenState extends State<DesignScreen> {
   final _pageController = PageController(initialPage: 0);
+  double progreso = 0.0;
   int currentIndex = 0;
 
   void onDataChanged(Map<String, dynamic> nuevosDatos) {
     setState(() => widget.datos = nuevosDatos);
+  }
+
+  void modificarProgreso(bool avanzar) {
+    setState(() {
+      if (avanzar) {
+        progreso += 0.33;
+      } else {
+        progreso -= 0.33;
+      }
+    });
   }
 
   @override
@@ -59,6 +70,7 @@ class _DesignScreenState extends State<DesignScreen> {
                     ),
                     onPressed: () {
                       if (currentIndex != 0) {
+                        modificarProgreso(false);
                         _pageController.animateToPage(currentIndex - 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
@@ -77,6 +89,7 @@ class _DesignScreenState extends State<DesignScreen> {
                     ),
                     onPressed: () {
                       if (currentIndex != 2) {
+                        modificarProgreso(true);
                         _pageController.animateToPage(currentIndex + 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
@@ -176,6 +189,17 @@ class _DesignScreenState extends State<DesignScreen> {
               Navigator.of(context).pushReplacementNamed('/home_screen');
             },
             icon: const Icon(Icons.arrow_back)),
+        centerTitle: true,
+        title: SizedBox(
+          width: 900,
+          child: LinearProgressIndicator(
+            backgroundColor: const Color.fromARGB(100, 150, 150, 150),
+            color: const Color.fromARGB(255, 30, 141, 34),
+            minHeight: 12,
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            value: progreso,
+          ),
+        ),
         shadowColor: Colors.black,
         iconTheme: const IconThemeData().copyWith(
           color: Colors.black,

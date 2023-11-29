@@ -65,7 +65,8 @@ class _MyHomePageState extends State<TextPage> {
     return SingleChildScrollView(
       child: Column(children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+          padding:
+              const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 15),
           child: Text(
             'Agregar Texto',
             style: const TextStyle()
@@ -97,18 +98,20 @@ class _MyHomePageState extends State<TextPage> {
           fillColor: Colors.green[200],
           color: Colors.green[400],
           constraints: const BoxConstraints(
-            minHeight: 30.0,
+            minHeight: 25.0,
             minWidth: 80.0,
           ),
           isSelected: _selectedPartes,
           children: partes,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+          padding:
+              const EdgeInsets.only(left: 8, right: 8, top: 15, bottom: 10),
           child: SizedBox(
             width: 250,
             height: 60,
             child: TextField(
+              style: const TextStyle(fontSize: 12),
               onChanged: (value) {
                 widget.datos['texto']['string'] = value;
                 widget.datos['texto']['zona'] = seleccion;
@@ -128,10 +131,20 @@ class _MyHomePageState extends State<TextPage> {
               obscureText: false,
               maxLength: 8,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Texto',
+                hintText: 'Texto',
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1, color: Color.fromARGB(124, 14, 94, 24))),
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 10),
+          child: Text(
+            'Tamaño de fuente',
+            style: const TextStyle()
+                .copyWith(fontSize: 12, fontWeight: FontWeight.bold),
           ),
         ),
         SizedBox(
