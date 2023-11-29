@@ -40,8 +40,18 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
                     onPressed: () {
                       Navigator.of(context).pushNamed('/signin_screen');
                     },
-                    child: const Text('Sign In'),
+                    child: const Text('Terminar sesión'),
                   ),
+                )
+              : IconButton(
+                  style: IconButton.styleFrom(
+                    iconSize: 40,
+                    foregroundColor: Colors.grey,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/signin_screen');
+                  },
+                  icon: const Icon(Icons.person),
                 ),
         ],
       ),
