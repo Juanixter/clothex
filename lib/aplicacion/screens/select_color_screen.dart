@@ -1,5 +1,6 @@
 import 'package:clothex_app/dominio/prendas.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class SelectColorScreen extends StatefulWidget {
   final Map<String, dynamic> datos;
@@ -23,10 +24,11 @@ List mycolors = <Color>[
   Colors.purple,
   Colors.orange,
   Colors.yellow,
-  Colors.black
+  Colors.brown
 ];
 
 Color primaryColor = mycolors[0];
+Color pickedColor = Colors.red;
 
 class _MyPageState extends State<SelectColorScreen> {
   @override
@@ -75,7 +77,9 @@ class _MyPageState extends State<SelectColorScreen> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
-                      style: IconButton.styleFrom(iconSize: 50),
+                      style: IconButton.styleFrom(
+                        iconSize: 50,
+                      ),
                       color: color,
                       onPressed: () {
                         widget.datos['color'] = color;
@@ -86,6 +90,46 @@ class _MyPageState extends State<SelectColorScreen> {
                   );
                 },
               ),
+              Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      iconSize: 50,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Escoge un color"),
+                              content: SingleChildScrollView(
+                                child: ColorPicker(
+                                  pickerAreaBorderRadius:
+                                      BorderRadius.circular(10),
+                                  pickerColor: Colors.red, //default color
+                                  onColorChanged: (Color color) {
+                                    setState(() {
+                                      widget.datos['color'] = color;
+                                      widget.onDataChange(widget.datos);
+                                    });
+                                    //on the color picked
+                                  },
+                                ),
+                              ),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: const Text('DONE'),
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pop(); //dismiss the color picker
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    icon: const Icon(Icons.add_rounded),
+                  ))
             ],
           ),
         ),
