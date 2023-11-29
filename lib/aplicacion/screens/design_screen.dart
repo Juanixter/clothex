@@ -135,6 +135,7 @@ class _DesignScreenState extends State<DesignScreen> {
                     ),
                     onPressed: () {
                       if (currentIndex != 0) {
+                        modificarProgreso(false);
                         _pageController.animateToPage(currentIndex - 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
@@ -153,6 +154,7 @@ class _DesignScreenState extends State<DesignScreen> {
                     ),
                     onPressed: () {
                       if (currentIndex != 2) {
+                        modificarProgreso(true);
                         _pageController.animateToPage(currentIndex + 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);

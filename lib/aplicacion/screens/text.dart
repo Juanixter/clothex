@@ -66,7 +66,7 @@ class _MyHomePageState extends State<TextPage> {
       child: Column(children: [
         Padding(
           padding:
-              const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 15),
+              const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 10),
           child: Text(
             'Agregar Texto',
             style: const TextStyle()
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<TextPage> {
         ),
         Padding(
           padding:
-              const EdgeInsets.only(left: 8, right: 8, top: 15, bottom: 10),
+              const EdgeInsets.only(left: 8, right: 8, top: 10, bottom: 5),
           child: SizedBox(
             width: 250,
             height: 60,
