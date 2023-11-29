@@ -43,16 +43,6 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
                     child: const Text('Terminar sesión'),
                   ),
                 )
-              : IconButton(
-                  style: IconButton.styleFrom(
-                    iconSize: 40,
-                    foregroundColor: Colors.grey,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/signin_screen');
-                  },
-                  icon: const Icon(Icons.person),
-                ),
         ],
       ),
       body: Center(
