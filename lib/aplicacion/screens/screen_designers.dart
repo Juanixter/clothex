@@ -51,6 +51,15 @@ class DesignersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('DISEÑADORES'),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed('/home_screen');
+            },
+            icon: const Icon(Icons.arrow_back)),
+        shadowColor: Colors.black,
+        iconTheme: const IconThemeData().copyWith(
+          color: Colors.black,
+        ),
       ),
       body: ListView.builder(
         itemCount: dummyDesigns.length,

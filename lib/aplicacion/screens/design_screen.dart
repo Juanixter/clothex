@@ -121,7 +121,7 @@ class _DesignScreenState extends State<DesignScreen> {
                           currentIndex == 0 ? Colors.white : Colors.black,
                     ),
                     onPressed: () {
-                      if (currentIndex != 0) {
+                      if (currentIndex > 0) {
                         _pageController.animateToPage(currentIndex - 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
@@ -139,7 +139,7 @@ class _DesignScreenState extends State<DesignScreen> {
                           currentIndex == 2 ? Colors.white : Colors.black,
                     ),
                     onPressed: () {
-                      if (currentIndex != 2) {
+                      if (currentIndex < 2) {
                         _pageController.animateToPage(currentIndex + 1,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
@@ -169,18 +169,18 @@ class _DesignScreenState extends State<DesignScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        elevation: 10,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/home_screen');
+          surfaceTintColor: Colors.white,
+          elevation: 10,
+          leading: GestureDetector(
+            onTap: () {
+              if (Navigator.canPop(context)) {
+                Navigator.of(context).pop();
+              } else {
+                Navigator.of(context).pushReplacementNamed('/home_screen');
+              }
             },
-            icon: const Icon(Icons.arrow_back)),
-        shadowColor: Colors.black,
-        iconTheme: const IconThemeData().copyWith(
-          color: Colors.black,
-        ),
-      ),
+            child: const Icon(Icons.arrow_back),
+          )),
       body: Column(
         children: [
           Container(
