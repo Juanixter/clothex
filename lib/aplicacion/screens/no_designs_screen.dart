@@ -18,7 +18,17 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
         automaticallyImplyLeading: false,
         actions: [
           FirebaseAuth.instance.currentUser != null
-              ? Padding(
+              ? IconButton(
+                  style: IconButton.styleFrom(
+                    iconSize: 40,
+                    foregroundColor: Colors.grey,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/profile_screen');
+                  },
+                  icon: const Icon(Icons.person),
+                )
+              : Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -28,21 +38,10 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
                       ),
                     ),
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                      setState(() {});
+                      Navigator.of(context).pushNamed('/signin_screen');
                     },
-                    child: const Text('Log Out'),
+                    child: const Text('Sign In'),
                   ),
-                )
-              : IconButton(
-                  style: IconButton.styleFrom(
-                    iconSize: 40,
-                    foregroundColor: Colors.grey,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/signin_screen');
-                  },
-                  icon: const Icon(Icons.person),
                 ),
         ],
       ),
