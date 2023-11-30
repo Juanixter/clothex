@@ -67,13 +67,16 @@ Future<List> getDesigns() async {
   List designs = [];
   CollectionReference crUsers = db.collection('Usuarios');
 
-  CollectionReference subCollectionRef =
-      crUsers.doc(FirebaseAuth.instance.currentUser!.uid).collection('diseños');
+  if (FirebaseAuth.instance.currentUser != null) {
+    CollectionReference subCollectionRef = crUsers
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('diseños');
 
-  QuerySnapshot queryDesigns = await subCollectionRef.get();
+    QuerySnapshot queryDesigns = await subCollectionRef.get();
 
-  for (var element in queryDesigns.docs) {
-    designs.add(element.data());
+    for (var element in queryDesigns.docs) {
+      designs.add(element.data());
+    }
   }
 
   return designs;

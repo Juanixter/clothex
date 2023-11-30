@@ -46,48 +46,58 @@ class _CheckoutScreen extends State<CheckoutScreen> {
     int colorValue = currentClotheColor.value;
     widget.datos?['color'] = colorValue;
 
-    designNumber().then(
-      (value) {
-        String titulo = 'Diseño $value';
-        widget.datos?['titulo'] = titulo;
-      },
-    );
-
-    return Scaffold(
-      body: Center(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
+    return FutureBuilder(
+      future: designNumber(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (FirebaseAuth.instance.currentUser != null) {
+            String titulo = 'Diseño ${snapshot.data}';
+            widget.datos?['titulo'] = titulo;
+          }
+          return Scaffold(
+            body: Center(
+              child: Center(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: buildConfetti(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: buildConfetti(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: buildImage(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: buildText(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FirebaseAuth.instance.currentUser != null
+                            ? null
+                            : buildButtonToLogin(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: buildExitButton(),
+                      )
+                    ],
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: buildImage(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: buildText(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FirebaseAuth.instance.currentUser != null
-                      ? null
-                      : buildButtonToLogin(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: buildExitButton(),
-                )
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
+          );
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -129,7 +139,8 @@ class _CheckoutScreen extends State<CheckoutScreen> {
         padding: const EdgeInsets.all(3.0),
         child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/design_details');
+              Navigator.of(context).pushReplacementNamed('/signin_screen',
+                  arguments: widget.datos);
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.withOpacity(0.3),

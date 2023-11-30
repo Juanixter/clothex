@@ -116,6 +116,21 @@ class _DesignScreenState extends State<DesignScreen> {
       heightRatio = 0.05;
       layoutType = Stack(
         children: [
+          PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            children: [
+              MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
+              SelectColorScreen(
+                  datos: widget.datos, onDataChange: onDataChanged),
+              if (tiposDePrenda.contains(widget.datos['tipo']))
+                TextPage(datos: widget.datos, onDataChange: onDataChanged)
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: Row(
@@ -161,21 +176,6 @@ class _DesignScreenState extends State<DesignScreen> {
               ],
             ),
           ),
-          PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            children: [
-              MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
-              SelectColorScreen(
-                  datos: widget.datos, onDataChange: onDataChanged),
-              if (tiposDePrenda.contains(widget.datos['tipo']))
-                TextPage(datos: widget.datos, onDataChange: onDataChanged)
-            ],
-          ),
         ],
       );
     }
@@ -185,7 +185,7 @@ class _DesignScreenState extends State<DesignScreen> {
           elevation: 10,
           leading: IconButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/home_screen');
+                Navigator.of(context).pushReplacementNamed('/select_clothe_type');
               },
               icon: const Icon(Icons.arrow_back)),
           centerTitle: true,

@@ -10,6 +10,7 @@ import 'package:clothex_app/aplicacion/screens/screen_designers.dart';
 
 import 'package:clothex_app/aplicacion/screens/signin_screen.dart';
 import 'package:clothex_app/aplicacion/screens/no_designs_screen.dart';
+import 'package:clothex_app/aplicacion/screens/signup_screen.dart';
 import 'package:clothex_app/dominio/design.dart';
 import 'package:flutter/material.dart';
 import 'package:clothex_app/dominio/designers.dart';
@@ -43,6 +44,15 @@ class RouteGenerator {
                   ));
         } else {
           return MaterialPageRoute(builder: (context) => SignInScreen());
+        }
+      case '/signup_screen':
+        if (args != null) {
+          return MaterialPageRoute(
+              builder: (context) => SignUpScreen(
+                    datos: args as Map<String, dynamic>,
+                  ));
+        } else {
+          return MaterialPageRoute(builder: (context) => SignUpScreen());
         }
       case '/my_designs_screen':
         return MaterialPageRoute(builder: (context) => const MyDesignsScreen());

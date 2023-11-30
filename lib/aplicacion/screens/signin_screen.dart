@@ -1,5 +1,3 @@
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
-import 'package:clothex_app/aplicacion/screens/signup_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +16,13 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
+
+  Future<int> designNumber() async {
+    List designs = await getDesigns();
+    int designsLength = designs.length;
+    return designsLength + 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,21 +45,30 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(
           height: 5,
         ),
-        firebaseUIButton(context, "Iniciar Sesión!", () {
-          FirebaseAuth.instance
-              .signInWithEmailAndPassword(
-                  email: _emailTextController.text,
-                  password: _passwordTextController.text)
-              .then((value) {
-            final id = value.user!.uid;
-            if (widget.datos != null) {
-              addDesign(widget.datos!, id);
-            }
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
-          }).onError((error, stackTrace) {
-            print("Error ${error.toString()}");
-          });
+        firebaseUIButton(context, "Iniciar Sesión!", () async {
+          if (FirebaseAuth.instance.currentUser == null) {
+            FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+                    email: _emailTextController.text,
+                    password: _passwordTextController.text)
+                .then((value) async {
+              final id = value.user!.uid;
+              if (widget.datos != null) {
+                await designNumber().then(
+                  (value) {
+                    String titulo = 'Diseño $value';
+                    widget.datos?['titulo'] = titulo;
+                  },
+                );
+                addDesign(widget.datos!, id);
+              }
+              Navigator.of(context).pushNamed('/home_screen');
+            }).onError((error, stackTrace) {
+              print("Error ${error.toString()}");
+            });
+          } else {
+            Navigator.of(context).pushNamed('/home_screen');
+          }
         }),
         signUpOption()
       ]),
@@ -69,12 +83,8 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(color: Colors.black)),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SignUpScreen(
-                          datos: widget.datos,
-                        )));
+            Navigator.of(context).pushReplacementNamed('/signup_screen',
+                arguments: widget.datos);
           },
           child: const Text(
             " Regístrate aquí",
