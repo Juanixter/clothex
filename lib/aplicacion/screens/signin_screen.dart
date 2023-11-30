@@ -1,5 +1,4 @@
 import 'package:clothex_app/aplicacion/screens/home_screen.dart';
-import 'package:clothex_app/aplicacion/screens/signup_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,12 +68,8 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(color: Colors.black)),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SignUpScreen(
-                          datos: widget.datos,
-                        )));
+            Navigator.of(context).pushReplacementNamed('/signup_screen',
+                arguments: widget.datos);
           },
           child: const Text(
             " Regístrate aquí",

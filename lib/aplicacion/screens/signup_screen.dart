@@ -1,4 +1,3 @@
-import 'package:clothex_app/aplicacion/screens/home_screen.dart';
 import 'package:clothex_app/aplicacion/widgets/shared_login_widgets.dart';
 import 'package:clothex_app/infraestructura/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,8 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               addInfo(id, _emailTextController.text,
                   _userNameTextController.text, _passwordTextController.text);
             }
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
+            Navigator.of(context).pushReplacementNamed('/home_screen');
           }).onError((error, stackTrace) {
             print("Error ${error.toString()}");
           });
