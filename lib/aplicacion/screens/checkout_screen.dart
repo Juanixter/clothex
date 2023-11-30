@@ -46,17 +46,14 @@ class _CheckoutScreen extends State<CheckoutScreen> {
     int colorValue = currentClotheColor.value;
     widget.datos?['color'] = colorValue;
 
-    designNumber().then(
-      (value) {
-        String titulo = 'Diseño $value';
-        widget.datos?['titulo'] = titulo;
-      },
-    );
-
     return FutureBuilder(
       future: designNumber(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          if (FirebaseAuth.instance.currentUser != null) {
+            String titulo = 'Diseño ${snapshot.data}';
+            widget.datos?['titulo'] = titulo;
+          }
           return Scaffold(
             body: Center(
               child: Center(

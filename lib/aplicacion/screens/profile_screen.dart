@@ -26,7 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () {
                       // Navega a la ruta '/home_screen' cuando se presiona el botón de retroceso
-                      Navigator.of(context).pushNamed('/home_screen');
+                      Navigator.of(context)
+                          .pushReplacementNamed('/home_screen');
                     },
                   ),
                 ),
@@ -71,10 +72,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: () {
-                            FirebaseAuth.instance.signOut();
+                          onPressed: () async {
+                            await FirebaseAuth.instance.signOut();
                             setState(() {});
-                            Navigator.of(context).pushNamed('/home_screen');
+                            Navigator.of(context)
+                                .pushReplacementNamed('/home_screen');
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,

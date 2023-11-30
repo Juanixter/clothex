@@ -110,6 +110,21 @@ class _DesignScreenState extends State<DesignScreen> {
       heightRatio = 0.05;
       layoutType = Stack(
         children: [
+          PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            children: [
+              MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
+              SelectColorScreen(
+                  datos: widget.datos, onDataChange: onDataChanged),
+              if (tiposDePrenda.contains(widget.datos['tipo']))
+                TextPage(datos: widget.datos, onDataChange: onDataChanged)
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: Row(
@@ -133,36 +148,36 @@ class _DesignScreenState extends State<DesignScreen> {
                   style: const TextStyle()
                       .copyWith(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                IconButton(
-                    style: IconButton.styleFrom(
-                      foregroundColor:
-                          currentIndex == 2 ? Colors.white : Colors.black,
-                    ),
-                    onPressed: () {
-                      if (currentIndex < 2) {
-                        _pageController.animateToPage(currentIndex + 1,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut);
-                      }
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios_rounded)),
+                if (tiposDePrenda.contains(widget.datos['tipo']))
+                  IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor:
+                            currentIndex == 2 ? Colors.white : Colors.black,
+                      ),
+                      onPressed: () {
+                        if (currentIndex < 2) {
+                          _pageController.animateToPage(currentIndex + 1,
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.easeInOut);
+                        }
+                      },
+                      icon: const Icon(Icons.arrow_forward_ios_rounded)),
+                if (!tiposDePrenda.contains(widget.datos['tipo']))
+                  IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor:
+                            currentIndex == 1 ? Colors.white : Colors.black,
+                      ),
+                      onPressed: () {
+                        if (currentIndex < 2) {
+                          _pageController.animateToPage(currentIndex + 1,
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.easeInOut);
+                        }
+                      },
+                      icon: const Icon(Icons.arrow_forward_ios_rounded)),
               ],
             ),
-          ),
-          PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            children: [
-              MaterialScreen(datos: widget.datos, onDataChange: onDataChanged),
-              SelectColorScreen(
-                  datos: widget.datos, onDataChange: onDataChanged),
-              if (tiposDePrenda.contains(widget.datos['tipo']))
-                TextPage(datos: widget.datos, onDataChange: onDataChanged)
-            ],
           ),
         ],
       );
@@ -181,10 +196,10 @@ class _DesignScreenState extends State<DesignScreen> {
           //   },
           //   child: const Icon(Icons.arrow_back),
           // )),
-          title: const Text('Salir'),
           leading: IconButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/home_screen');
+                Navigator.of(context)
+                    .pushReplacementNamed('/select_clothe_type');
               },
               icon: const Icon(Icons.arrow_back))),
       body: Column(

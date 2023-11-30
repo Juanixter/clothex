@@ -45,7 +45,9 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
             List<String> indexList = [];
 
             if (snapshot.hasData) {
-              datos['materiales_posibles'] = snapshot.data![0]['materiales'];
+              if (datos['materiales_posibles'] == null) {
+                datos['materiales_posibles'] = snapshot.data![0]['materiales'];
+              }
               return Column(
                 children: [
                   SizedBox(
@@ -136,7 +138,7 @@ class _ClotheTypeScreenState extends State<ClotheTypeScreen> {
                                     datos['img_back'] = back;
                                     datos['color'] = Colors.white;
                                     datos['material'] = {
-                                      "nombre": "Text('Algodón')",
+                                      "nombre": 'Text("Algodón")',
                                       "indice": 0,
                                     };
                                     datos['talla'] = {

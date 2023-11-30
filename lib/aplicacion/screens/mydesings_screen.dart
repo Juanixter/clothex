@@ -76,8 +76,7 @@ class DesignCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context)
-              .pushNamed('/designers_detail_screen', arguments: design);
+          Navigator.of(context).pushNamed('/design_details', arguments: design);
         },
         style: ElevatedButton.styleFrom(
             surfaceTintColor: Colors.white,

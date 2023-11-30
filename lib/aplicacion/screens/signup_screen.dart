@@ -37,8 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(
           height: 30,
         ),
-        reusableTextField("Ingresa Username", Icons.person_outline, false,
-            _userNameTextController),
+        reusableTextField("Ingresa nombre de usuario", Icons.person_outline,
+            false, _userNameTextController),
         const SizedBox(
           height: 20,
         ),
@@ -60,6 +60,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               .then((value) {
             final id = value.user!.uid;
             if (widget.datos != null) {
+              String titulo = 'Diseño 1';
+              widget.datos?['titulo'] = titulo;
               addDesign(widget.datos!, id);
               addInfo(id, _emailTextController.text,
                   _userNameTextController.text, _passwordTextController.text);

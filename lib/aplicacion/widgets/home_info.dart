@@ -36,18 +36,6 @@ class HomeInfo extends StatelessWidget {
           Image.asset(
             'assets/Images/logo.png',
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Una app con la que podras diseñar tus propias prendas de ropa personalizadas, con Clothex los limites son tu imaginación. ¡Anímate y diseña la prenda que siempre has deseado tener!',
-            textAlign: TextAlign.center,
-            style: const TextStyle().copyWith(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         ],
       );
     }

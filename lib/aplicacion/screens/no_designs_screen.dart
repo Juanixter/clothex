@@ -40,7 +40,7 @@ class _NoDesignsScreenState extends State<NoDesignsScreen> {
                     onPressed: () {
                       Navigator.of(context).pushNamed('/signin_screen');
                     },
-                    child: const Text('Iniciar sesión'),
+                    child: const Text('Iniciar Sesión'),
                   ),
                 )
         ],
