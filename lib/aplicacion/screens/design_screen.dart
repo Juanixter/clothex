@@ -171,16 +171,22 @@ class _DesignScreenState extends State<DesignScreen> {
       appBar: AppBar(
           surfaceTintColor: Colors.white,
           elevation: 10,
-          leading: GestureDetector(
-            onTap: () {
-              if (Navigator.canPop(context)) {
-                Navigator.of(context).pop();
-              } else {
+          // leading: GestureDetector(
+          //   onTap: () {
+          //     if (Navigator.canPop(context)) {
+          //       Navigator.of(context).pop();
+          //     } else {
+          //       Navigator.of(context).pushReplacementNamed('/home_screen');
+          //     }
+          //   },
+          //   child: const Icon(Icons.arrow_back),
+          // ))
+          title: const Text('Salir'),
+          leading: IconButton(
+              onPressed: () {
                 Navigator.of(context).pushReplacementNamed('/home_screen');
-              }
-            },
-            child: const Icon(Icons.arrow_back),
-          )),
+              },
+              icon: const Icon(Icons.arrow_back))),
       body: Column(
         children: [
           Container(
