@@ -30,10 +30,8 @@ class _MyHomePageState extends State<TextPage> {
     setState(() {
       print("Seleccion:   $seleccion");
       if (seleccion == "Torso") {
-        print("chest");
         textoTorso = s;
       } else if (seleccion == "Espalda") {
-        print("back");
         textoEspalda = s;
       }
 
@@ -81,7 +79,6 @@ class _MyHomePageState extends State<TextPage> {
                 _selectedPartes[i] = i == index;
                 if (_selectedPartes[i]) {
                   seleccion = partes[i].toString().split('"')[1];
-                  print(seleccion);
                   //"Mangas", "Pecho", "Espalda"
                 }
               }
@@ -105,8 +102,7 @@ class _MyHomePageState extends State<TextPage> {
           children: partes,
         ),
         Padding(
-          padding:
-              const EdgeInsets.only(left: 8, right: 8, top: 10, bottom: 5),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 10, bottom: 2),
           child: SizedBox(
             width: 250,
             height: 60,
@@ -140,7 +136,7 @@ class _MyHomePageState extends State<TextPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 10),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 7),
           child: Text(
             'Tamaño de fuente',
             style: const TextStyle()
@@ -154,7 +150,7 @@ class _MyHomePageState extends State<TextPage> {
               value: _currentSliderValue,
               inactiveColor: Colors.grey,
               activeColor: Colors.green,
-              min: 10,
+              min: 8,
               max: 25,
               divisions: 15,
               label: _currentSliderValue.round().toString(),
@@ -178,7 +174,8 @@ class _MyHomePageState extends State<TextPage> {
               Navigator.of(context).pushReplacementNamed('/checkout_screen',
                   arguments: widget.datos);
             },
-            child: const Text('¡Termina tu diseño!'),
+            child: const Text('¡Termina tu diseño!',
+                style: TextStyle(fontSize: 20)),
           ),
         ),
       ]),
